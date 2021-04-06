@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<%@ page import="it19208718.Queries"%>
+<%@ page import="it19208718.DBConnection"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.SQLException"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html lang="en">
 
 <head>
@@ -92,7 +100,7 @@
                         </div>
                         <div class="row">
                             <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
+                                <h5>Loremf ipsum dolor sit amet, consectetur<br></h5>
                             </div>
                         </div>
                         <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
@@ -109,6 +117,16 @@
                         </div>
                     </div>
                 </div>
+                <% 
+                
+					
+					Connection conn = DBConnection.getConnection();
+                
+                	out.print(Queries.fetchProducts(conn));
+                
+                
+                
+				%>
                 <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                     <div class="product-container">
                         <div class="row">
