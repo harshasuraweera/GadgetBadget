@@ -1,12 +1,24 @@
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
 <html lang="en">
+<%@ page import="it19208718.Queries"%>
+<%@ page import="it19208718.PaymentServiceDBConnection"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.SQLException"%>
 
 <%
+	//DB connection list
+	Connection paymentServiceDBConn = PaymentServiceDBConnection.getConnection();
 
-out.print(session.getAttribute("statusMsg"));
+	
 
+	//logged user - username - from naduns 
+	String loggedUsername = "user001";
+	
+	
 %>
-
 
 <head>
     <meta charset="utf-8">
@@ -34,14 +46,57 @@ out.print(session.getAttribute("statusMsg"));
     <link rel="stylesheet" href="assets/assets_har/css/Testimonial-Slider-9.css">
 </head>
 
+
+<%
+		//get product ID as a arraylist
+		ArrayList<String> productIdsInTheCart = new ArrayList<String>();
+		productIdsInTheCart = Queries.getProductIdListToArrayFromCartAfterPaymentSuccess(paymentServiceDBConn, loggedUsername);
+		
+		//get product ID as a arraylist
+		ArrayList<String> productNamessInTheCart = new ArrayList<String>();
+		productNamessInTheCart = Queries.getProductNameListToArrayFromCartAfterPaymentSuccess(paymentServiceDBConn, loggedUsername);
+
+
+		
+		//set Tbody to purchased products
+		String tBody = "";
+		for(int i=0; i < productIdsInTheCart.size(); i++){
+			
+			String downladLinkForEachgProduct = Queries.getProductDownloadLinkListToArrayFromCartAfterPaymentSuccess(paymentServiceDBConn, productIdsInTheCart.get(i).toString());
+			
+			tBody += "<tr>\r\n"+
+				     " <th scope='row'>"+(i+1)+"</th> \r\n" +
+				     " <td>"+productIdsInTheCart.get(i).toString()+"</td> \r\n" +
+				     " <td>"+productNamessInTheCart.get(i).toString()+"</td> \r\n" +
+				     " <td><a target='_blank' href = "+downladLinkForEachgProduct+" >Click Here</a></td> \r\n" +
+				     "</tr>";
+			
+		}
+		
+		
+		
+		//make cart empty
+		Queries.emptyCart(paymentServiceDBConn, loggedUsername);
+	
+
+
+%>
+
+
+
+
+
+
+
+
 <body style="margin-top: 0px;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md">
             <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
-                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link " href="#">Home</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="cart.html">Cart</a></li>
                         <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
@@ -57,14 +112,43 @@ out.print(session.getAttribute("statusMsg"));
                 <div class="col-md-4 col-lg-2"></div>
                 <div class="col-md-4 col-lg-8">
                     <div class="bs-callout bs-callout-success"><img src="assets/assets_har/img/Sad%20bankrupt%20thinking%20of%20money%20problems.jpg" style="height: 100px;width: auto;">
-                        <h4><strong>Yay! It's done. Thank you!</strong><br></h4>
-                        <p>Visit your&nbsp;<a href="my-downloads.html">download</a>&nbsp;page to find out more.<br></p>
+                        <h4><strong>Yay! It's done. Your <i>ORDER_ID</i> is "<% out.print(request.getParameter("order_id")); %>"</strong><br><br></h4>
+                        
+                        	<table class="table">
+							  <thead>
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">Product ID</th>
+							      <th scope="col">Product Name</th>
+							      <th scope="col">Download Link</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							   
+								<% out.print(tBody); %>
+
+							  </tbody>
+							</table>
+							
+							
+                        <p>Visit &nbsp;<a href="my-downloads.jsp">My Downloads</a>&nbsp;page to access above products any time!<br></p>
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2"></div>
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="footer-basic" style="margin-top: 50px;">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>

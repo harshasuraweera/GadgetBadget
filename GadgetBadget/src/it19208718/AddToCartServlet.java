@@ -3,6 +3,7 @@ package it19208718;
 import java.io.IOException;
 import java.sql.Connection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,11 @@ public class AddToCartServlet extends HttpServlet {
 		Connection conn = PaymentServiceDBConnection.getConnection();
 		
 		Queries.addToCart(conn, loggedUsername, productId, productName , shortDescription, defaultQuantity, productPrice);
+		
+		
+		RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("/index.jsp");
+		RequetsDispatcherObj.forward(request, response);
+		
 		
 		
 	}

@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Queries {
 	
 	
-	
+	// Fetch all products - from product service DB - tharuni's db
 	public static String fetchAllProducts(Connection conn) throws SQLException {
 		
 		String output = "";
@@ -70,8 +71,8 @@ public class Queries {
 	}
 	
 	
-	
-	public static String fetchTopSellingProducts(Connection conn) throws SQLException {
+	// Fetch high selling products - from product service DB - tharuni's db
+	public static String fetchTopSellingProducts(Connection conn, String loggedUsernameToAddCart) throws SQLException {
 		
 		String output = "";
 		String sql = "SELECT * FROM testproducts WHERE sales > 20";
@@ -88,13 +89,13 @@ public class Queries {
 		        		break;
 		        	}
 		        	
-		        	String productId = rs.getString("id");
+		        	String productId = rs.getString("productId");
 		        	String productName = rs.getString("name");
 		        	String shortDescription = rs.getString("sDesc");
 		        	String totalSales = rs.getString("sales");
 		        	String productPrice = rs.getString("price");
 		        	
-		        	String loggedUsername = "user001";
+		        	String loggedUsername = loggedUsernameToAddCart;
 		        	String defaultQuantity = "1";
 		        	
 		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
@@ -147,7 +148,7 @@ public class Queries {
 	}
 	
 	
-	
+	//Add products to cart - Related to PaymentServiceDBConnection - my Db done
 	public static void addToCart(Connection conn, String username , String productId, String productName, String shortDescription, String quantity, String price) {
 		
 		String sql = "INSERT INTO cart (loggedUsername, productId, productName, quantity, productPrice) VALUES (?,?,?,?,?)";
@@ -174,7 +175,7 @@ public class Queries {
 	}
 	
 	
-	//load items to cart
+	//load items to cart - Fetch from PaymentServiceDBConnection - my Db done
 	public static String fetchCartDetails(Connection conn, String loggedUsername) throws SQLException {
 		
 		String output = "";
@@ -229,8 +230,8 @@ public class Queries {
 	}
 	
 	
-	//get products in the cart as a list
-	public static String getProductNameAsList(Connection conn, String loggedUsername) throws SQLException {
+	//get products in the cart as a list - FROM PaymentServiceDBConnection - my Db done
+	public static String getProductNameAsListInCartForSpecificUser(Connection conn, String loggedUsername) throws SQLException {
 		
 		String productNameList = "";
 		
@@ -240,7 +241,7 @@ public class Queries {
 
 		        while (rs.next()) {
 		        	
-		        	productNameList += rs.getString("productName") + " , ";
+		        	productNameList += rs.getString("productName") + " | ";
 
 
 		        }
@@ -249,8 +250,73 @@ public class Queries {
 	}
 	
 	
+	//get product ID list from cart to set download enable
+	public static ArrayList<String> getProductIdListToArrayFromCartAfterPaymentSuccess(Connection conn, String loggedUsername) throws SQLException {
+		
+		ArrayList<String> productIdsInTheCart = new ArrayList<String>();
+		
+		String sql = "SELECT * FROM cart c WHERE c.loggedUsername = '"+loggedUsername+"' ";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	productIdsInTheCart.add(rs.getString("productId"));
+
+		        }
+		 }
+		
+		return productIdsInTheCart;
+	}
 	
-	//remove item from cart
+	
+	//get product NAME list from cart to set download enable
+	public static ArrayList<String> getProductNameListToArrayFromCartAfterPaymentSuccess(Connection conn, String loggedUsername) throws SQLException {
+		
+		ArrayList<String> productIdsInTheCart = new ArrayList<String>();
+		
+		String sql = "SELECT * FROM cart c WHERE c.loggedUsername = '"+loggedUsername+"' ";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	productIdsInTheCart.add(rs.getString("productName"));
+
+		        }
+		 }
+		
+		return productIdsInTheCart;
+	}
+		
+	
+	
+	
+	//get product Download Link list from cart to set download enable
+	public static String getProductDownloadLinkListToArrayFromCartAfterPaymentSuccess(Connection conn, String productId) throws SQLException {
+		
+		String productDownloadLinkInTheCart = "";
+		
+		String sql = "SELECT * FROM testProducts tp WHERE tp.productId = '"+productId+"' ";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	productDownloadLinkInTheCart = rs.getString("downloadLink");
+
+		        }
+		 }
+		
+		return productDownloadLinkInTheCart;
+	}
+	
+	
+	
+	
+	
+	
+	//remove item from cart - FROM PaymentServiceDBConnection - my Db done
 	public static void deleteFromCart(Connection conn, String cartId) {
 		
 		String sql = "DELETE FROM cart WHERE cartId = '"+Integer.parseInt(cartId)+"' ";
@@ -268,7 +334,7 @@ public class Queries {
 	}
 	
 	
-	//calculate total price on cart
+	//calculate total price on cart - FROM PaymentServiceDBConnection - my Db done
 	public static int calculateCartTotal(Connection conn, String loggedUsername) throws SQLException {
 		
 		int total = 0;
@@ -286,29 +352,41 @@ public class Queries {
 	
 	
 	
+	//get cart item count for specific user
+	public static int getCartItemCountForSpecificUser(Connection conn, String loggedUsername) throws SQLException {
+		
+		int total = 0;
+		
+		String sql = "SELECT COUNT(cartId) FROM cart c WHERE c.loggedUsername = '"+loggedUsername+"' ";
+
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		rs.next(); // SELECT count(*) always returns exactly 1 row
+		total = rs.getInt(1); // Get value of first column
+         
+       
+		return total;
+	}
 	
 	
-	public static void payments(Connection conn, String satusCode) {
+	
+	
+	//make cart empty
+	public static void emptyCart(Connection conn, String loggedUsername) {
 		
-		String sql = "INSERT INTO payments (statusCode) VALUES (?)";
-		
+		String sql = "DELETE FROM cart WHERE loggedUsername = '"+loggedUsername+"' ";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-			
-			pstmt.setString(1, satusCode);
-			
-			
-			pstmt.executeUpdate();
-			
+
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
 			
 
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
 	
 	
 	

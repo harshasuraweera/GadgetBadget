@@ -8,6 +8,17 @@
 <%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.SQLException"%>
 
+
+<%
+	//DB connection list
+	Connection paymentServiceDBConn = PaymentServiceDBConnection.getConnection();
+	
+
+	//logged user - username - from naduns 
+	String loggedUsername = "user001";
+
+%>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -37,12 +48,12 @@
 <body style="margin-top: 0px;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid"><a class="navbar-brand" href="index.jsp"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
-                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Selling</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="index.jsp">Home</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="cart.jsp">Cart</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="selling.jsp">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
                         </li>
@@ -83,10 +94,9 @@
                
                 
                 <%
-                                               	//Load cart items
-                                               	                Connection conn = PaymentServiceDBConnection.getConnection();
-                                               	            	out.print(Queries.fetchCartDetails(conn, "user001"));
-                                               %>
+                         //Load cart items
+                         out.print(Queries.fetchCartDetails(paymentServiceDBConn, "user001"));
+                %>
                 
                 
                 
@@ -106,11 +116,11 @@
           <div class="p-4">
             <p class="font-italic mb-4">Service fee and additional costs are calculated based on products and the seller.</p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$<% out.print(Queries.calculateCartTotal(conn, "user001")); %>.00</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Service Fee (3%)</strong><strong>$<% out.print(Queries.calculateCartTotal(conn, "user001") *3/100); %> </strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Sub Total </strong><strong>$<% out.print(Queries.calculateCartTotal(paymentServiceDBConn, loggedUsername)); %>.00</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Service Fee (3%)</strong><strong>$<% out.print(Queries.calculateCartTotal(paymentServiceDBConn, loggedUsername) *3/100); %> </strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>FREE</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">$<% out.print(Queries.calculateCartTotal(conn, "user001") *103/100 ); %>.00 </h5>
+                <h5 class="font-weight-bold">$<% out.print(Queries.calculateCartTotal(paymentServiceDBConn, loggedUsername) *103/100 ); %>.00 </h5>
               </li>
             </ul>
             
@@ -128,56 +138,56 @@
           
           
           <%
+          		
           
-          	//generate order ID
-          	String orderId = RequiredMethods.getOrderId();
-          	
-          	//product names as a list
-          	String productNameList = Queries.getProductNameAsList(conn, "user001");
-          
-          	
-          	//Checkoutdetails - From user table
-          		
-          		//fname
-          		String fname = "";
-          		
-          		
-          		//lanme
-          		String lname = "";
-          		
-          		
-          		//email
-          		String email = "";
-          		
-          		
-          		//mobile
-          		String mobile = "";
-          		
-          		
-          		//city
-          		String city = "";
-          		
-          		
-          		//address
-          		String address = "";
-          		
-          		
-          	
-          	//Create sessions for payment success page
-          
-         	// session.setAttribute("statusMsg", msg);
-         	
-         	
-         	
-         	
-         	
-         	
-         	
-         	
-         	
-         	
-          
-          %>
+                //generate order ID
+                String orderId = RequiredMethods.generateOrderId();
+                                        	
+                //product names as a list
+                String productNameList = Queries.getProductNameAsListInCartForSpecificUser(paymentServiceDBConn, loggedUsername);
+                                        
+                                        	
+                //Checkoutdetails - From user table - nadun's db
+                                        		
+                         //fname
+                         String fname = "amal";
+                                        		
+                                        		
+                         //lanme
+                         String lname = "bandara";
+                                        		
+                                        		
+                         //email
+                         String email = "amalbandara@gmail.com";
+                                        		
+                                        		
+                         //mobile
+                         String mobile = "0774809190";
+                                        		
+                                        		
+                          //city
+                          String city = "yatiyantota";
+                                        		
+                                        		
+                          //address
+                          String address = "No01, Yatiyantota, Kegalle";
+                                        		
+                                        		
+                                        
+                   	// session.setAttribute("statusMsg", msg);
+                			
+                	// CREATE SESSIONS FOR PAYMENT SUCCESS PAGE	
+                	
+                	session.setAttribute("orderId", orderId);
+                	session.setAttribute("productNameList", productNameList);
+                	session.setAttribute("productNameList", productNameList);
+                	session.setAttribute("productNameList", productNameList);
+                	session.setAttribute("productNameList", productNameList);
+					
+                	
+                			
+                	
+           %>
           
           <div class="p-4">
           <p class="font-italic mb-4">Checkout details are filling automatically according to your account information.</p>
@@ -191,18 +201,18 @@
 			    <input type="hidden" name="order_id" value="<% out.print(orderId); %>">
 			    <input type="hidden" name="items" value="<% out.print(productNameList); %>">
 			    <input type="hidden" name="currency" value="USD">
-			    <input type="hidden" name="amount" value="<% out.print(Queries.calculateCartTotal(conn, "user001") *103/100); %>">  
+			    <input type="hidden" name="amount" value="<% out.print(Queries.calculateCartTotal(paymentServiceDBConn, loggedUsername) *103/100); %>">  
 			    
 			    <input type="hidden" name="country" value="Sri Lanka">
 			    
 			    <div class="row">
 			    	<div class="col">
 			    		<label for="first_name">First Name</label>
-				    	<input class="form-control" type="text" name="first_name"  >
+				    	<input class="form-control" type="text" name="first_name" value="<% out.print(fname); %>" >
 			    	</div>
 			    	<div class="col">
 			    		<label for="last_name">Last Name</label>
-			    		<input class="form-control" type="text" name="last_name"  >
+			    		<input class="form-control" type="text" name="last_name"  value="<% out.print(lname); %>" >
 			    	</div>
 				   
 			    </div>
@@ -211,7 +221,7 @@
 			    <div class="row">
 				    <div class="col">
 					    <label for="email">Email address</label>
-					    <input class="form-control" type="text" name="email"  >
+					    <input class="form-control" type="text" name="email" value="<% out.print(email); %>"  >
 				    </div>
 			    </div>
 			    
@@ -219,18 +229,18 @@
 			    <div class="row">
 			    	<div class="col">
 				   		<label for="phone">Mobile</label>
-				    	<input class="form-control" type="text" name="phone"  >
+				    	<input class="form-control" type="text" name="phone" value="<% out.print(mobile); %>"  >
 				    </div>
 				    <div class="col">
 				   		<label for="city">City</label>
-			    		<input class="form-control" type="text" name="city"  >
+			    		<input class="form-control" type="text" name="city" value="<% out.print(city); %>" >
 				    </div>
 			    </div>
 			    
 			    <div class="row">
 				    <div class="col">
 					    <label for="address">Address</label>
-					    <textarea class="form-control" name="address"  ></textarea>
+					    <textarea class="form-control" name="address" ><% out.print(address); %></textarea>
 					</div>
 			    </div>
 			    <br>

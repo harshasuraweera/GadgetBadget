@@ -9,6 +9,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html lang="en">
 
+
+<%
+	//DB connection list
+	Connection paymentServiceDBConn = PaymentServiceDBConnection.getConnection();
+
+
+	
+	//logged user - username - from naduns 
+	String loggedUsername = "user001";
+
+%>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -35,6 +47,13 @@
     <link rel="stylesheet" href="assets/assets_har/css/Testimonial-Slider-9.css">
 </head>
 
+<%
+
+	//get cart item count
+	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
+
+%>
+
 <body style="margin-top: 0;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md">
@@ -42,7 +61,7 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
                         <li class="nav-item" style="width: auto;"><a class="nav-link active" href="index.jsp">Home</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.jsp">Cart</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.jsp">Cart <sup><% out.print(cartItemCount); %></sup> </a></li>
                         <li class="nav-item" style="width: auto;"><a class="nav-link" href="selling.jsp">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
@@ -94,11 +113,10 @@
         <div class="container">
             <div class="row product-list dev">
                
-                <%
-                               	Connection conn = PaymentServiceDBConnection.getConnection();
-                                               
-                                               	out.print(Queries.fetchTopSellingProducts(conn));
-                               %>
+                <%				
+                				//Should be retrive from productServiceDB - tharuni
+                                out.print(Queries.fetchTopSellingProducts(paymentServiceDBConn, loggedUsername));
+                %>
                
                
             </div>
