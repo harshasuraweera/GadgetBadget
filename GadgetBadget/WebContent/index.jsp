@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page import="it19208718.Queries"%>
-<%@ page import="it19208718.PaymentServiceDBConnection"%>
+<%@ page import="com.PaymentServiceDBConnection"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>

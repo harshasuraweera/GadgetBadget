@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
 <%@ page import="it19208718.Queries"%>
-<%@ page import="it19208718.PaymentServiceDBConnection"%>
+<%@ page import="com.PaymentServiceDBConnection"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
@@ -59,18 +59,38 @@
 
 		
 		//set Tbody to purchased products
-		String tBody = "";
+		String tBody_purchaseList = "";
 		for(int i=0; i < productIdsInTheCart.size(); i++){
 			
 			String downladLinkForEachgProduct = Queries.getProductDownloadLinkListToArrayFromCartAfterPaymentSuccess(paymentServiceDBConn, productIdsInTheCart.get(i).toString());
 			
-			tBody += "<tr>\r\n"+
+			tBody_purchaseList += "<tr>\r\n"+
 				     " <th scope='row'>"+(i+1)+"</th> \r\n" +
 				     " <td>"+productIdsInTheCart.get(i).toString()+"</td> \r\n" +
 				     " <td>"+productNamessInTheCart.get(i).toString()+"</td> \r\n" +
 				     " <td><a target='_blank' href = "+downladLinkForEachgProduct+" >Click Here</a></td> \r\n" +
 				     "</tr>";
+				     
+			//storeID for each product
+			String storeId = Queries.getStoreIdOfParticularProduct(paymentServiceDBConn, productIdsInTheCart.get(i).toString() );
 			
+			//productId for each product
+			String productId = productIdsInTheCart.get(i).toString();
+			
+			//productName for each product
+			String productName = productNamessInTheCart.get(i).toString();
+					
+			//product price for each product
+			String productPrice = Queries.getPriceOfParticularProduct(paymentServiceDBConn, productId);
+				     
+			//insert into completed products ---- IMPORTANT
+			Queries.insertIntoCompletedOrdersAfterPaymentSuccess(paymentServiceDBConn, request.getParameter("order_id").toString(), storeId , productId , productName, productPrice );	     
+			
+			
+			//Insert into my downloads
+			Queries.insertIntoMyDownloads(paymentServiceDBConn, loggedUsername, productId);
+					
+					
 		}
 		
 		
@@ -78,7 +98,14 @@
 		//make cart empty
 		Queries.emptyCart(paymentServiceDBConn, loggedUsername);
 	
-
+		
+		
+		
+		
+		
+		
+		
+		
 
 %>
 
@@ -125,7 +152,7 @@
 							  </thead>
 							  <tbody>
 							   
-								<% out.print(tBody); %>
+								<% out.print(tBody_purchaseList); %>
 
 							  </tbody>
 							</table>

@@ -117,7 +117,7 @@ public class Queries {
 		        			
 		        			"										<form method='post' action='AddToCartServlet' >"+
 		        														"<input type= 'hidden' name='loggedUsername' value= "+loggedUsername+" >"+
-		        														"<input type= 'hidden' name='loggedUsername' value= "+productId+" >"+
+		        														"<input type= 'hidden' name='productId' value= "+productId+" >"+
 		        														"<input type= 'hidden' name='productName' value= "+productName+" >"+
 		        														"<input type= 'hidden' name='shortDescription' value= "+shortDescription+" >"+
 		        														"<input type= 'hidden' name='productPrice' value= "+productPrice+" >"+
@@ -290,6 +290,25 @@ public class Queries {
 	}
 		
 	
+	//get product price for list of cart to insert to completed orders
+	public static ArrayList<String> getProductPicesForEachCartItem(Connection conn, String loggedUsername) throws SQLException {
+		
+		ArrayList<String> productPrices = new ArrayList<String>();
+		
+		String sql = "SELECT * FROM cart c WHERE c.loggedUsername = '"+loggedUsername+"'  ";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	productPrices.add(rs.getString("productPrice"));
+
+		        }
+		 }
+		
+		return productPrices;
+	}
+	
 	
 	
 	//get product Download Link list from cart to set download enable
@@ -385,6 +404,171 @@ public class Queries {
 			
 			e.printStackTrace();
 		}
+	}
+	
+	
+	//insert into completed products
+	public static void insertIntoCompletedOrdersAfterPaymentSuccess(Connection conn, String orderId, String storeId, String prductId, String productName, String price ) {
+		
+		String sql = "INSERT INTO completedorder (orderId, storeId, productId, ProductName, price) VALUES (?,?,?,?,?)";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			
+			pstmt.setString(1, orderId);
+			pstmt.setString(2, storeId);
+			pstmt.setString(3, prductId);
+			pstmt.setString(4, productName);
+			pstmt.setString(5, price);
+			
+			pstmt.executeUpdate();
+			
+			
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	//get StoreId of given product
+	
+	public static String getStoreIdOfParticularProduct(Connection conn, String productId) throws SQLException {
+		
+		String storeId = "";
+		
+		String sql = "SELECT * FROM testproducts tp WHERE tp.productId = '"+productId+"' ";
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	storeId = rs.getString("storeId");
+
+		        }
+		 }
+		
+		return storeId;
+         
+       
+		
+	}
+	
+	
+	
+	//get price of given product
+	
+	public static String getPriceOfParticularProduct(Connection conn, String productId) throws SQLException {
+		
+		String price = "";
+		
+		String sql = "SELECT * FROM testproducts tp WHERE tp.productId = '"+productId+"' ";
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	price = rs.getString("price");
+
+		        }
+		 }
+		
+		return price;
+         
+       
+		
+	}
+	
+	
+	//insert into my downloads
+	public static void insertIntoMyDownloads(Connection conn, String paidUsername, String paidProductId) {
+		
+		String sql = "INSERT INTO mydownloads (paidUsername, paidProductId) VALUES (?,?)";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			
+			pstmt.setString(1, paidUsername);
+			pstmt.setString(2, paidProductId);
+			
+			pstmt.executeUpdate();
+			
+			
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	//Display Download accessed (purchased) products from my download table
+	
+	// Fetch all products - from product service DB - tharuni's db
+	public static String fetchMyDownloadsProducts(Connection conn, String loggedUsername) throws SQLException {
+		
+		String output = "";
+		String sql = "SELECT * FROM mydownloads WHERE paidUsername = '"+loggedUsername+"' ";
+		
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	String paidProductId = rs.getString("paidProductId");
+		        	
+		        	String sql2 = "SELECT * FROM testproducts WHERE productId = '"+paidProductId+"' ";
+		        	
+		        	
+		        	
+				        	try (PreparedStatement stmt2 = conn.prepareStatement(sql2);
+				   		         ResultSet rs2 = stmt2.executeQuery()) {
+		
+				   		        while (rs2.next()) {
+				   		        	
+				   		        	String productName = rs2.getString("name");
+				   		        	String shortDescription = rs2.getString("sDesc");
+				   		        	String productPrice = rs2.getString("price");
+				   		        	String downloadLink = rs2.getString("downloadLink");
+				   		        	
+				   		        	
+				   		        	output += "<li class=\"list-group-item\">\r\n" + 
+				   		        			"          <!-- Custom content-->\r\n" + 
+				   		        			"          <div class=\"media align-items-lg-center flex-column flex-lg-row p-3\">\r\n" + 
+				   		        			"            <div class=\"media-body order-2 order-lg-1\">\r\n" + 
+				   		        			"              <h5 class=\"mt-0 font-weight-bold mb-2\"> "+productName+" </h5>\r\n" + 
+				   		        			"              <p class=\"font-italic text-muted mb-0 small\"> "+shortDescription+" </p>\r\n" + 
+				   		        			"              <div class=\"d-flex align-items-center justify-content-between mt-1\">\r\n" + 
+				   		        			"                <h6 class=\"font-weight-bold my-2\">$ "+productPrice+".00 </h6>\r\n" + 
+				   		        			"                <ul class=\"list-inline small\"> <a href= "+downloadLink+" target='_blank'>Click to download</a> \r\n" +
+				   		        								
+				   		        			"                </ul>\r\n" + 
+				   		        			"              </div>\r\n" + 
+				   		        			"            </div><img src=\"https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg\" alt=\"Generic placeholder image\" width=\"200\" class=\"ml-lg-5 order-1 order-lg-2\">\r\n" + 
+				   		        			"          </div>\r\n" + 
+				   		        			"          <!-- End -->\r\n" + 
+				   		        			"        </li>";
+				   		        	
+				   		        	
+				   		        }
+				   		 }
+		        	
+		        	
+		        	
+		        	
+		        	
+		        }
+		 }
+		
+		return output;
+		
 	}
 	
 	
