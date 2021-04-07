@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page import="it19208718.Queries"%>
-<%@ page import="it19208718.DBConnection"%>
+<%@ page import="it19208718.PaymentServiceDBConnection"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
@@ -94,16 +94,11 @@
         <div class="container">
             <div class="row product-list dev">
                
-                <% 
-                
-					
-					Connection conn = DBConnection.getConnection();
-                
-                	out.print(Queries.fetchTopSellingProducts(conn));
-                
-                
-                
-				%>
+                <%
+                               	Connection conn = PaymentServiceDBConnection.getConnection();
+                                               
+                                               	out.print(Queries.fetchTopSellingProducts(conn));
+                               %>
                
                
             </div>

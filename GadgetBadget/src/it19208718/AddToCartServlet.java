@@ -33,7 +33,7 @@ public class AddToCartServlet extends HttpServlet {
     	String loggedUsername = request.getParameter("loggedUsername");
     	
 		
-		Connection conn = DBConnection.getConnection();
+		Connection conn = PaymentServiceDBConnection.getConnection();
 		
 		Queries.addToCart(conn, loggedUsername, productId, productName , shortDescription, defaultQuantity, productPrice);
 		

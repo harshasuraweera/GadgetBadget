@@ -24,7 +24,7 @@ public class DeleteFromCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String cartId = request.getParameter("cartId");
-		Connection conn = DBConnection.getConnection();
+		Connection conn = PaymentServiceDBConnection.getConnection();
 		
 		Queries.deleteFromCart(conn, cartId);
 		

@@ -2,7 +2,7 @@
 <%@page import="it19208718.RequiredMethods"%>
 <html lang="en">
 <%@ page import="it19208718.Queries"%>
-<%@ page import="it19208718.DBConnection"%>
+<%@ page import="it19208718.PaymentServiceDBConnection"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
@@ -83,12 +83,10 @@
                
                 
                 <%
-                
-                	//Load cart items
-	                Connection conn = DBConnection.getConnection();
-	            	out.print(Queries.fetchCartDetails(conn, "user001"));
-                
-                %>
+                                               	//Load cart items
+                                               	                Connection conn = PaymentServiceDBConnection.getConnection();
+                                               	            	out.print(Queries.fetchCartDetails(conn, "user001"));
+                                               %>
                 
                 
                 
