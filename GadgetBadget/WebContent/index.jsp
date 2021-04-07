@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>re degisn</title>
+    <title>Welcome to GadgetBadget</title>
     <link rel="stylesheet" href="assets/assets_har/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/assets_har/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/assets_har/fonts/ionicons.min.css">
@@ -38,12 +38,12 @@
 <body style="margin-top: 0;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid"><a class="navbar-brand" href="index.jsp"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
-                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Selling</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link active" href="index.jsp">Home</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.jsp">Cart</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="selling.jsp">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
                         </li>
@@ -58,8 +58,8 @@
                 <div class="carousel-inner">
                     <div class="carousel-item">
                         <div class="jumbotron pulse animated hero-nature carousel-hero">
-                            <h1 class="hero-title">Hero Nature</h1>
-                            <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                            <h1 class="hero-title">Sell Your Products Globally</h1>
+                            <p class="hero-subtitle">We are globally recognized company that allows to start selling for FREE</p>
                             <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
                         </div>
                     </div>
@@ -93,163 +93,22 @@
     <div>
         <div class="container">
             <div class="row product-list dev">
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Loremf ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                 <% 
                 
 					
 					Connection conn = DBConnection.getConnection();
                 
-                	out.print(Queries.fetchProducts(conn));
+                	out.print(Queries.fetchTopSellingProducts(conn));
                 
                 
                 
 				%>
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                    <div class="product-container">
-                        <div class="row">
-                            <div class="col-md-12"><a class="product-image" href="single-product.html"><img src="assets/assets_har/img/iphone6.jpg"></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-lg-12">
-                                <h5>Lorem ipsum dolor sit amet, consectetur<br></h5>
-                            </div>
-                        </div>
-                        <div class="product-rating"><a class="small-text" href="#" style="margin-left: 10px;"><strong>13 Sales</strong></a></div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
-                                <div class="row" style="padding-left: 0px;">
-                                    <div class="col-6"><button class="btn btn-light" type="button" style="background: var(--indigo);margin-left: 0px;">Add to Cart</button></div>
-                                    <div class="col-6">
-                                        <p class="product-price">$599.00 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
+               
             </div>
         </div>
-    </div><div style="text-align: center;margin-top: 16px;"><button class="btn btn-primary align-items-start" type="button" style="color: var(--light);">Load More Items</button></div>
+    </div><div style="text-align: center;margin-top: 16px;"><a href="products.jsp"><button class="btn btn-primary align-items-start" type="button" style="color: var(--light);">See More</button></a></div>
     <div class="footer-basic" style="margin-top: 50px;">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<%
+
+out.print(session.getAttribute("statusMsg"));
+
+%>
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>re degisn</title>
+    <title>Payment Success</title>
     <link rel="stylesheet" href="assets/assets_har/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/assets_har/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/assets_har/fonts/ionicons.min.css">
