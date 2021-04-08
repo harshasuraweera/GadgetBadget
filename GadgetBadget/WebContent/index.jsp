@@ -75,23 +75,23 @@
                 <div class="carousel-inner">
                     <div class="carousel-item">
                         <div class="jumbotron pulse animated hero-nature carousel-hero">
-                            <h1 class="hero-title">Sell Your Products Globally</h1>
-                            <p class="hero-subtitle">We are globally recognized company that allows to start selling for FREE</p>
-                            <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                            <h1 class="hero-title">Buy & Sell Products Globally</h1>
+                            <p class="hero-subtitle">Gadget Badget is a internationally recognized company which is allowing customers to buy products and sellers to sell products through the platform.</p>
+                            <p><a class="btn btn-primary hero-button plat" role="button" href="register.jsp">Get Start</a></p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="jumbotron pulse animated hero-photography carousel-hero">
-                            <h1 class="hero-title">Hero Photography</h1>
-                            <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-                            <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                            <h1 class="hero-title">Boost Your Passive Income</h1>
+                            <p class="hero-subtitle">Developers can easily increase their passive income with Gadget Badget. No more barriers. Don't be late!</p>
+                            <p><a class="btn btn-primary hero-button plat" role="button" href="register.jsp">Get Start</a></p>
                         </div>
                     </div>
                     <div class="carousel-item active">
                         <div class="jumbotron pulse animated hero-technology carousel-hero">
-                            <h1 class="hero-title">Hero Technology</h1>
-                            <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-                            <p><a class="btn btn-primary hero-button plat" role="button" href="#">Learn more</a></p>
+                            <h1 class="hero-title">Explore & Improve New Ideas</h1>
+                            <p class="hero-subtitle">Hey young researchers, this is the perfect time. Gadget Badget offering thousand of funds for new innovations ideas.</p>
+                            <p><a class="btn btn-primary hero-button plat" role="button" href="register.jsp">Get Start</a></p>
                         </div>
                     </div>
                 </div>
