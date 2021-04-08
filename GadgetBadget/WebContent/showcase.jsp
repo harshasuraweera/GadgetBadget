@@ -18,29 +18,25 @@
 	String loggedUsername = "user001";
 	
 	
-	
-	// get product ID
-	String productId = request.getParameter("productId");
-	
-	//get productName according to productId
-	String productName = Queries.getProductNameAccordingToProductId(paymentServiceDBConn, productId);
+	//get storeID
+	String storeId = request.getParameter("storeId");
 	
 	
-	//get StoreID according to productId
-	String storeId = Queries.getStoreIdAccordingToProductId(paymentServiceDBConn, productId);
+	//get store name
+	String storeName = Queries.getStoreNameAccordingToStoreId(paymentServiceDBConn, storeId);
 	
 
 %>
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Product : <% out.print(productName); %></title>
+    <title>Store | <% out.print(storeName); %></title>
     <link rel="stylesheet" href="assets/assets_har/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/assets_har/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus+Slab">
     <link rel="stylesheet" href="assets/assets_har/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/assets_har/css/Animated-Pretty-Product-List-v12.css">
+    <link rel="stylesheet" href="assets/assets_har/css/Animated-Text-Background.css">
+    <link rel="stylesheet" href="assets/assets_har/css/Animated-Type-Heading.css">
     <link rel="stylesheet" href="assets/assets_har/css/best-carousel-slide.css">
     <link rel="stylesheet" href="assets/assets_har/css/Bold-BS4-Jumbotron-with-Particles-js-1.css">
     <link rel="stylesheet" href="assets/assets_har/css/Bold-BS4-Jumbotron-with-Particles-js.css">
@@ -48,7 +44,6 @@
     <link rel="stylesheet" href="assets/assets_har/css/Bootstrap-Callout-Success.css">
     <link rel="stylesheet" href="assets/assets_har/css/Footer-1-basic-Irlene-Galiza.css">
     <link rel="stylesheet" href="assets/assets_har/css/gift-product-long.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
     <link rel="stylesheet" href="assets/assets_har/css/Lista-Productos-Canito.css">
     <link rel="stylesheet" href="assets/assets_har/css/Pretty-Search-Form.css">
@@ -58,13 +53,6 @@
     <link rel="stylesheet" href="assets/assets_har/css/Testimonial-Slider-9-1.css">
     <link rel="stylesheet" href="assets/assets_har/css/Testimonial-Slider-9.css">
 </head>
-
-<%
-
-	//get cart item count
-	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
-
-%>
 
 <body style="margin-top: 0px;">
     <div>
@@ -84,13 +72,23 @@
         </nav>
     </div>
     <div>
-        <div class="container">
-            <h3 class="text-center" style="margin-top: 20px;margin-bottom: 30px;">Product Details</h3>
-				<%
-				
-					out.print(Queries.fetchSingleProduct(paymentServiceDBConn, productId, loggedUsername, storeId));
-				
-				%>
+        <div class="container">				<div class="caption v-middle text-center">
+					<h1 class="cd-headline clip">
+			            <span class="blc">Store | </span>
+			            <span class="cd-words-wrapper">
+			              <b class="is-visible"><% out.print(storeName); %>.</b>
+			              
+			            </span>
+	          		</h1>
+				</div>
+            <div class="row product-list dev">
+                <%
+                	
+                out.print(Queries.fetchProductsAccordingToStoreID(paymentServiceDBConn, loggedUsername, storeId));
+                
+                %>
+                
+            </div>
         </div>
     </div>
     <div class="footer-basic" style="margin-top: 50px;">
@@ -110,6 +108,8 @@
     <script src="assets/assets_har/js/jquery.min.js"></script>
     <script src="assets/assets_har/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/assets_har/js/Animated-Pretty-Product-List-v12.js"></script>
+    <script src="assets/assets_har/js/Animated-Text-Background.js"></script>
+    <script src="assets/assets_har/js/Animated-Type-Heading.js"></script>
     <script src="assets/assets_har/js/Bold-BS4-Jumbotron-with-Particles-js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="assets/assets_har/js/Simple-Slider.js"></script>

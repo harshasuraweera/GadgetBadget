@@ -55,7 +55,7 @@ public class Queries {
 		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
 		        			"                    <div class=\"product-container\">\r\n" + 
 		        			"                        <div class=\"row\">\r\n" + 
-		        			"                            <div class=\"col-md-12\"><a class=\"product-image\" href=\"single-product.html\"><img src=\"assets/assets_har/img/iphone6.jpg\"></a></div>\r\n" + 
+		        			"                            <div class=\"col-md-12\"><a class=\"product-image\" href=\"single-product.jsp?productId="+productId+"\"><img src=\"assets/assets_har/img/iphone6.jpg\"></a></div>\r\n" + 
 		        			"                        </div>\r\n" + 
 		        			"                        <div class=\"row\">\r\n" + 
 		        			"                            <div class=\"col-8 col-lg-12\">\r\n" + 
@@ -105,7 +105,7 @@ public class Queries {
 	public static String fetchTopSellingProducts(Connection conn, String loggedUsernameToAddCart) throws SQLException {
 		
 		String output = "";
-		String sql = "SELECT * FROM testproducts WHERE sales > 20";
+		String sql = "SELECT * FROM testproducts WHERE sales >= 20";
 		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class Queries {
 		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
 		        			"                    <div class=\"product-container\">\r\n" + 
 		        			"                        <div class=\"row\">\r\n" + 
-		        			"                            <div class=\"col-md-12\"><a class=\"product-image\" href=\"single-product.html\"><img src=\"assets/assets_har/img/iphone6.jpg\"></a></div>\r\n" + 
+		        			"                            <div class=\"col-md-12\"><a class=\"product-image\" href=\"single-product.jsp?productId="+productId+"\"><img src=\"assets/assets_har/img/iphone6.jpg\"></a></div>\r\n" + 
 		        			"                        </div>\r\n" + 
 		        			"                        <div class=\"row\">\r\n" + 
 		        			"                            <div class=\"col-8 col-lg-12\">\r\n" + 
@@ -398,7 +398,24 @@ public class Queries {
 	}
 	
 	
-	
+	//get product name according to productId
+	public static String getProductNameAccordingToProductId(Connection conn, String productId) throws SQLException {
+			
+			String productName = "";
+			
+			String sql = "SELECT * FROM testproducts tp WHERE tp.productId = '"+productId+"'  ";
+			try (PreparedStatement stmt = conn.prepareStatement(sql);
+			         ResultSet rs = stmt.executeQuery()) {
+
+			        while (rs.next()) {
+			        	
+			        	productName= rs.getString("name");
+
+			        }
+			 }
+			
+			return productName;
+	}
 	
 	
 	
@@ -646,6 +663,223 @@ public class Queries {
 		preparedStmt.executeUpdate();
 		
 	}
+	
+	
+	
+	//Fetch single product details according to productid
+	
+	public static String fetchSingleProduct(Connection conn ,String productId, String loggedUsernameToAddCart, String storeId) throws SQLException {
+		
+		String output = "";
+		String addToCartCode ="";
+		String sql = "SELECT * FROM testproducts WHERE productId = '"+productId+"' ";
+		
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	String productName = rs.getString("name");
+		        	String shortDescription = rs.getString("sDesc");
+		        	String longDescription = rs.getString("lDesc");
+		        	String totalSales = rs.getString("sales");
+		        	String productPrice = rs.getString("price");
+		        	String loggedUsername = loggedUsernameToAddCart;
+		        	String defaultQuantity = "1";
+		        	
+		        	
+		        	//Find if the user already purchased this product or not
+		        	boolean thisIsAlreadyPurchased = checkAlreadyPurchasedOrNot(conn, loggedUsername, productId);
+		        	
+		        	String disableOrEnableAddToCart = "";
+		        	String btnValue = " Add to Cart";
+		        	
+		        	if(thisIsAlreadyPurchased) { //purchased
+		        		disableOrEnableAddToCart = "disabled";
+		        		btnValue = " Owned";
+		        	}
+		        	
+		        	
+		        	
+		        	addToCartCode += "<form method='post' action='AddToCartServlet' >\r\n" + 
+		        			"				<input type= 'hidden' name='loggedUsername' value= "+loggedUsername+" >\r\n" + 
+		        			"		        <input type= 'hidden' name='productId' value= "+productId+" >\r\n" + 
+		        			"		        <input type= 'hidden' name='productName' value= "+productName+" >\r\n" + 
+		        			"		        <input type= 'hidden' name='shortDescription' value= "+shortDescription+" >\r\n" + 
+		        			"		        <input type= 'hidden' name='productPrice' value= "+productPrice+" >\r\n" + 
+		        			"		        <input type= 'hidden' name='defaultQuantity' value= "+defaultQuantity+" >\r\n" + 
+		        			"		        <button type='submit' class='btn btn-danger btn-lg center-block' style=\"margin-left: 0px;background: var(--indigo);border-style: none;\"  "+disableOrEnableAddToCart+"     ><i class=\"fa fa-cart-plus\"></i>"+btnValue+" </button> \r\n" + 
+		        			"		  </form>";
+		        	
+		        	
+		        	output += "            <div class=\"row\">\r\n" + 
+		        			"                <div class=\"col-md-7\">\r\n" + 
+		        			"                    <div class=\"row\">\r\n" + 
+		        			"                        <div class=\"col-md-12\"><img class=\"img-thumbnail img-fluid center-block\" src=\"assets/assets_har/img/videomicme.png\"></div>\r\n" + 
+		        			"                    </div>\r\n" + 
+		        			"                    <div class=\"row\">\r\n" + 
+		        			"                        <div class=\"col-6 col-sm-6 col-md-6\"><img class=\"img-thumbnail img-fluid center-block\" src=\"assets/assets_har/img/videomic-me.gif\"></div>\r\n" + 
+		        			"                        <div class=\"col-6 col-sm-6 col-md-6\"><img class=\"img-thumbnail img-fluid center-block\" src=\"assets/assets_har/img/videomic-me.gif\"></div>\r\n" + 
+		        			"                    </div>\r\n" + 
+		        			"                    <div class=\"row\">\r\n" + 
+		        			"                        <div class=\"col-6 col-sm-6 col-md-6\"><img class=\"img-thumbnail img-fluid center-block\" src=\"assets/assets_har/img/videomic-me.gif\"></div>\r\n" + 
+		        			"                        <div class=\"col-6 col-sm-6 col-md-6\"><img class=\"img-thumbnail img-fluid center-block\" src=\"assets/assets_har/img/videomic-me.gif\"></div>\r\n" + 
+		        			"                    </div>\r\n" + 
+		        			"                </div>\r\n" + 
+		        			"                <div class=\"col-md-5\">\r\n" + 
+		        			"                    <h4>"+productName+"</h4><br>\r\n" + 
+		        			"                    <p><strong>Short Description</strong><br>"+shortDescription+".</p>\r\n" + 
+		        			"                    <p><strong>Full Description</strong><br>"+longDescription+".</p><br>\r\n" + 
+		        			"                    <h2 class=\"text-left text-success\"><i class=\"fa fa-dollar\"></i>&nbsp;"+productPrice+".00</h2>"+ 
+		        			
+		        			"			"+addToCartCode+
+		        			
+		        			 "<a href='showcase.jsp?storeId="+storeId+"'><button class=\"btn btn-danger btn-lg center-block\" type=\"button\" style=\"margin-left: 0px;background: var(--green);border-style: none;\"><i class=\"fa fa-cart-plus\"></i>&nbsp;Visit Store</button></a>\r\n" + 
+		        			"                </div>\r\n" + 
+		        			"            </div>";
+		        	
+		        	
+		        }
+		 }
+		
+		return output;
+		
+		
+	}
+	
+	
+	
+	//get storeId according to productId
+	public static String getStoreIdAccordingToProductId(Connection conn, String productId) throws SQLException {
+			
+			String productName = "";
+			
+			String sql = "SELECT * FROM testproducts tp WHERE tp.productId = '"+productId+"'  ";
+			try (PreparedStatement stmt = conn.prepareStatement(sql);
+			         ResultSet rs = stmt.executeQuery()) {
+
+			        while (rs.next()) {
+			        	
+			        	productName= rs.getString("storeId");
+
+			        }
+			 }
+			
+			return productName;
+	}
+	
+	
+	
+	//get store name according to storeId
+	public static String getStoreNameAccordingToStoreId(Connection conn, String storeId) throws SQLException {
+		
+		String storeName = "";
+		
+		String sql = "SELECT * FROM teststore tp WHERE tp.storeId = '"+storeId+"'  ";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	storeName= rs.getString("storeName");
+
+		        }
+		 }
+		
+		return storeName;
+	}
+	
+	
+	
+	//load products according to store
+	public static String fetchProductsAccordingToStoreID(Connection conn, String loggedUsernameToAddCart ,String storeID) throws SQLException {
+		
+		 
+		
+		String sql = "SELECT * FROM testproducts WHERE storeId = '"+storeID+"' ";
+		
+		
+		String output = "";
+		
+		
+		try (PreparedStatement stmt = conn.prepareStatement(sql);
+		         ResultSet rs = stmt.executeQuery()) {
+
+		        while (rs.next()) {
+		        	
+		        	String productId = rs.getString("productId");
+		        	String productName = rs.getString("name");
+		        	String shortDescription = rs.getString("sDesc");
+		        	String totalSales = rs.getString("sales");
+		        	String productPrice = rs.getString("price");
+		        	
+		        	String loggedUsername = loggedUsernameToAddCart;
+		        	String defaultQuantity = "1";
+		        	
+		        	
+		        	//Find if the user already purchased this product or not
+		        	boolean thisIsAlreadyPurchased = checkAlreadyPurchasedOrNot(conn, loggedUsername, productId);
+		        	
+		        	String disableOrEnableAddToCart = "";
+		        	String btnValue = "Add to Cart";
+		        	
+		        	if(thisIsAlreadyPurchased) { //purchased
+		        		disableOrEnableAddToCart = "disabled";
+		        		btnValue = "Owned";
+		        	}
+		        	
+		        	
+		        	
+		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
+		        			"                    <div class=\"product-container\">\r\n" + 
+		        			"                        <div class=\"row\">\r\n" + 
+		        			"                            <div class=\"col-md-12\"><a class=\"product-image\" href=\"single-product.jsp?productId="+productId+"\"><img src=\"assets/assets_har/img/iphone6.jpg\"></a></div>\r\n" + 
+		        			"                        </div>\r\n" + 
+		        			"                        <div class=\"row\">\r\n" + 
+		        			"                            <div class=\"col-8 col-lg-12\">\r\n" + 
+		        			"                                <h5> "+productName+" <br></h5>\r\n" + 
+		        			"                            </div>\r\n" + 
+		        			"                        </div>\r\n" + 
+		        			"                        <div class=\"product-rating\"><a class=\"small-text\" href=\"#\" style=\"margin-left: 10px;\"><strong> "+ totalSales + "Sales"+" </strong></a></div>\r\n" + 
+		        			"                        <div class=\"row\">\r\n" + 
+		        			"                            <div class=\"col-12\">\r\n" + 
+		        			"                                <p class=\"product-description\"> "+shortDescription+" </p>\r\n" + 
+		        			"                                <div class=\"row\" style=\"padding-left: 0px;\">\r\n" + 
+		        			"                                   <div class=\"col-6\">"+
+		        			
+		        			"										<form method='post' action='AddToCartServlet' >"+
+		        														"<input type= 'hidden' name='loggedUsername' value= "+loggedUsername+" >"+
+		        														"<input type= 'hidden' name='productId' value= "+productId+" >"+
+		        														"<input type= 'hidden' name='productName' value= "+productName+" >"+
+		        														"<input type= 'hidden' name='shortDescription' value= "+shortDescription+" >"+
+		        														"<input type= 'hidden' name='productPrice' value= "+productPrice+" >"+
+		        														"<input type= 'hidden' name='defaultQuantity' value= "+defaultQuantity+" >"+
+		        														"<input type='submit' class='btn btn-light' style=\"background: var(--indigo);margin-left: 0px; color:white;\" value= '"+btnValue+"'  "+disableOrEnableAddToCart+"     >    "+                                 
+		        													"</form>"+
+		        			
+		        			"									</div>\r\n"+ 
+		        			
+		        			
+		        			
+		        			"                                    <div class=\"col-6\">\r\n" + 
+		        			"                                        <p class=\"product-price\"> "+"$"+ productPrice +".00"+" </p>\r\n" + 
+		        			"                                    </div>\r\n" + 
+		        			"                                </div>\r\n" + 
+		        			"                            </div>\r\n" + 
+		        			"                        </div>\r\n" + 
+		        			"                    </div>\r\n" + 
+		        			"                </div>";
+		        	
+		        	
+		        }
+		 }
+		
+		return output;
+		
+	}
+	
+	
+	
 	
 	
 

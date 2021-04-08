@@ -24,6 +24,8 @@
 	//get cart item count
 	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
 	
+	
+	
 %>
 
 <head>
