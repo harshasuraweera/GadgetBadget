@@ -89,6 +89,10 @@
 			
 			//Insert into my downloads
 			Queries.insertIntoMyDownloads(paymentServiceDBConn, loggedUsername, productId);
+			
+			
+			//Increment sales count
+			Queries.incrementSalesCountAfterPaymentSuccess(paymentServiceDBConn,productIdsInTheCart.get(i).toString() );
 					
 					
 		}

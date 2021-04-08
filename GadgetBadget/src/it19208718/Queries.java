@@ -578,7 +578,6 @@ public class Queries {
 	
 	//Display Download accessed (purchased) products from my download table
 	
-	// Fetch all products - from product service DB - tharuni's db
 	public static String fetchMyDownloadsProducts(Connection conn, String loggedUsername) throws SQLException {
 		
 		String output = "";
@@ -639,8 +638,14 @@ public class Queries {
 	}
 	
 	
-	
-	
+	//Increment sales count on payment success page
+	public static void incrementSalesCountAfterPaymentSuccess(Connection conn, String paidProductId) throws SQLException {
+		
+		String sql = "UPDATE testproducts SET sales = sales + 1 WHERE productId = '"+paidProductId+"' ";
+		PreparedStatement preparedStmt = conn.prepareStatement(sql);
+		preparedStmt.executeUpdate();
+		
+	}
 	
 	
 
