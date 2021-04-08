@@ -17,12 +17,14 @@
 	String loggedUsername = "user001";
 	
 	
+	//get cart item count
+	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, loggedUsername);
+	
 	//IF search clicked by the user
 	String search = request.getParameter("search");
 	
 	
-	//get cart item count
-	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
+
 	
 	
 	
@@ -57,12 +59,12 @@
 <body style="margin-top: 0px;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid"><a class="navbar-brand" href="index.jsp"><img src="assets/assets_har/img/gg.png" width="150px" height="auto"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="index.jsp">Home</a></li>
                         <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart <sup><% out.print(cartItemCount); %></sup></a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Selling</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="selling.jsp">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
                         </li>

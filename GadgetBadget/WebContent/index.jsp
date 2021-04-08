@@ -18,6 +18,9 @@
 	
 	//logged user - username - from naduns 
 	String loggedUsername = "user001";
+	
+	//get cart item count
+	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, loggedUsername);
 
 %>
 
@@ -47,12 +50,7 @@
     <link rel="stylesheet" href="assets/assets_har/css/Testimonial-Slider-9.css">
 </head>
 
-<%
 
-	//get cart item count
-	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
-
-%>
 
 <body style="margin-top: 0;">
     <div>
