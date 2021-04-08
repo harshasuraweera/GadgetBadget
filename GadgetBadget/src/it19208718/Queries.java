@@ -11,20 +11,46 @@ public class Queries {
 	
 	
 	// Fetch all products - from product service DB - tharuni's db
-	public static String fetchAllProducts(Connection conn) throws SQLException {
+	public static String fetchAllProducts(Connection conn, String loggedUsernameToAddCart, String search) throws SQLException {
+		
+		String sql = "";
+		
+		if(search.equals("all")) {
+			 sql = "SELECT * FROM testproducts";
+		}else if(!search.equals("all")) {
+			 sql = "SELECT * FROM testproducts WHERE name LIKE '%"+search+"%' ";
+		}
 		
 		String output = "";
-		String sql = "SELECT * FROM testproducts";
+		
 		
 		try (PreparedStatement stmt = conn.prepareStatement(sql);
 		         ResultSet rs = stmt.executeQuery()) {
 
 		        while (rs.next()) {
 		        	
+		        	String productId = rs.getString("productId");
 		        	String productName = rs.getString("name");
 		        	String shortDescription = rs.getString("sDesc");
 		        	String totalSales = rs.getString("sales");
 		        	String productPrice = rs.getString("price");
+		        	
+		        	String loggedUsername = loggedUsernameToAddCart;
+		        	String defaultQuantity = "1";
+		        	
+		        	
+		        	//Find if the user already purchased this product or not
+		        	boolean thisIsAlreadyPurchased = checkAlreadyPurchasedOrNot(conn, loggedUsername, productId);
+		        	
+		        	String disableOrEnableAddToCart = "";
+		        	String btnValue = "Add to Cart";
+		        	
+		        	if(thisIsAlreadyPurchased) { //purchased
+		        		disableOrEnableAddToCart = "disabled";
+		        		btnValue = "Owned";
+		        	}
+		        	
+		        	
 		        	
 		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
 		        			"                    <div class=\"product-container\">\r\n" + 
@@ -44,9 +70,13 @@ public class Queries {
 		        			"                                   <div class=\"col-6\">"+
 		        			
 		        			"										<form method='post' action='AddToCartServlet' >"+
+		        														"<input type= 'hidden' name='loggedUsername' value= "+loggedUsername+" >"+
+		        														"<input type= 'hidden' name='productId' value= "+productId+" >"+
 		        														"<input type= 'hidden' name='productName' value= "+productName+" >"+
-		        														"<input type='submit' class='btn btn-light' style=\"background: var(--indigo);margin-left: 0px; color:white;\" value= 'Add to cart'>"+
-		        														
+		        														"<input type= 'hidden' name='shortDescription' value= "+shortDescription+" >"+
+		        														"<input type= 'hidden' name='productPrice' value= "+productPrice+" >"+
+		        														"<input type= 'hidden' name='defaultQuantity' value= "+defaultQuantity+" >"+
+		        														"<input type='submit' class='btn btn-light' style=\"background: var(--indigo);margin-left: 0px; color:white;\" value= '"+btnValue+"'  "+disableOrEnableAddToCart+"     >    "+                                 
 		        													"</form>"+
 		        			
 		        			"									</div>\r\n"+ 
@@ -97,6 +127,19 @@ public class Queries {
 		        	
 		        	String loggedUsername = loggedUsernameToAddCart;
 		        	String defaultQuantity = "1";
+
+		        	
+		        	//Find if the user already purchased this product or not
+		        	boolean thisIsAlreadyPurchased = checkAlreadyPurchasedOrNot(conn, loggedUsername, productId);
+		        	
+		        	String disableOrEnableAddToCart = "";
+		        	String btnValue = "Add to Cart";
+		        	
+		        	if(thisIsAlreadyPurchased) { //purchased
+		        		disableOrEnableAddToCart = "disabled";
+		        		btnValue = "Owned";
+		        	}
+		        	
 		        	
 		        	output += "<div class=\"col-sm-6 col-md-4 product-item animation-element slide-top-left\">\r\n" + 
 		        			"                    <div class=\"product-container\">\r\n" + 
@@ -122,7 +165,7 @@ public class Queries {
 		        														"<input type= 'hidden' name='shortDescription' value= "+shortDescription+" >"+
 		        														"<input type= 'hidden' name='productPrice' value= "+productPrice+" >"+
 		        														"<input type= 'hidden' name='defaultQuantity' value= "+defaultQuantity+" >"+
-		        														"<input type='submit' class='btn btn-light' style=\"background: var(--indigo);margin-left: 0px; color:white;\" value= 'Add to cart'>"+
+		        														"<input type='submit' class='btn btn-light' style=\"background: var(--indigo);margin-left: 0px; color:white;\" value= '"+btnValue+"'  "+disableOrEnableAddToCart+"   >"+
 		        														
 		        													"</form>"+
 		        			
@@ -146,6 +189,30 @@ public class Queries {
 		return output;
 		
 	}
+	
+	
+	//Find if the user already purchased this product or not
+	public static boolean checkAlreadyPurchasedOrNot(Connection conn, String loggedUsername, String productId) throws SQLException {
+		
+		boolean thisIsAlreadyPurchased = false;
+		
+		String sql = "SELECT * FROM mydownloads WHERE paidUsername= '"+loggedUsername+"' and paidProductId = '"+productId+"' ";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+				
+		if(rs.next()) {
+			thisIsAlreadyPurchased = true; //purchased
+		}else {
+			thisIsAlreadyPurchased = false; // not purchased
+		}
+		
+		return thisIsAlreadyPurchased;
+		
+		
+	}
+	
+	
 	
 	
 	//Add products to cart - Related to PaymentServiceDBConnection - my Db done
