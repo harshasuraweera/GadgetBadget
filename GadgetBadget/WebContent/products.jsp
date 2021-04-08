@@ -20,7 +20,10 @@
 	//IF search clicked by the user
 	String search = request.getParameter("search");
 	
-
+	
+	//get cart item count
+	int cartItemCount = Queries.getCartItemCountForSpecificUser(paymentServiceDBConn, "user001");
+	
 %>
 
 <head>
@@ -56,7 +59,7 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ml-auto" style="width: 310px;">
                         <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart</a></li>
+                        <li class="nav-item" style="width: auto;"><a class="nav-link" href="cart.html">Cart <sup><% out.print(cartItemCount); %></sup></a></li>
                         <li class="nav-item" style="width: auto;"><a class="nav-link" href="#">Selling</a></li>
                         <li class="nav-item dropdown" style="width: auto;"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
