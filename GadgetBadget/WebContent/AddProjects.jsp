@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,18 +58,39 @@
     </div>
     <section class="register-photo" style="background: rgb(231,254,225);">
         <div class="form-container">
-            <form method="post" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+        
+            <form action ="ProjectSubmitServlet" method="POST" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+            
                 <h3 class="text-center" style="font-family: 'Averia Gruesa Libre', cursive;color: rgb(17,145,15);font-size: 25px;"><strong>- Submit Your Project -</strong></h3>
                 <h2 class="text-center" style="text-align: left;"></h2>
+                
+              
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="titular"></div>
+                <div class="form-group"><input class="form-control" type="text" name="title"></div>
+                
+                
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Short Description :</strong></label>
-                <div class="form-group" style="height: 60px;"><textarea class="form-control" style="height: 90px;"></textarea></div>
+                <div class="form-group" style="height: 60px;"><textarea class="form-control" name="ShortDes" style="height: 90px;"></textarea></div>
+                
+               
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>
-                <div class="form-group"><textarea class="form-control" style="height: 170px;"></textarea></div><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label><input class="form-control-file" type="file">
-                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label><input class="form-control" type="text" name="titular">
-                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label><input class="form-control" type="text" name="titular">
-                <div class="m-5"><button class="btn btn-success ribbon" type="button">Submit</button></div>
+                <div class="form-group"><textarea class="form-control" name="LongDes" style="height: 170px;"></textarea></div>
+                
+               
+                <label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label>
+                <input class="form-control-file" type="file">
+                
+                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label>
+                <input class="form-control" type="text" name="srcLink">
+                
+                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label>
+                <input class="form-control" type="text" name="videoLink">
+                
+                
+                <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Submit Project">Submit Project</button></div>
+                
                 <div class="form-group">
                     <div class="m-5">
                         <div class="text-center m-3"></div>
