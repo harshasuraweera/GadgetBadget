@@ -1,27 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%    
-String id = request.getParameter("id");
-String driver = "com.mysql.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://localhost:3306/";
-String database = "projectservice";
-String username = "root";
-String password = "hashini";
-try {
-Class.forName(driver);
-} catch (ClassNotFoundException e) {
-e.printStackTrace();
-}
-Connection connection = null;
-Statement statement = null;
-ResultSet resultSet = null;
-%>
-
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,58 +56,49 @@ ResultSet resultSet = null;
             </div>
         </nav>
     </div>
-    <hr>
-    <div class="di"></div><button class="btn btn-info btn-block btn-sm add-row btn-xs" type="button" style="height: 35px;background: rgb(79,170,88);font-size: 13px;font-family: 'Averia Gruesa Libre', cursive;color: rgb(0,0,0);"><i class="fa fa-plus"></i><strong>&nbsp;Add New Project</strong></button><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;font-size: 16px;color: rgb(64,157,56);" for="nombre"><strong>&nbsp; Your Projects :</strong></label>
-    <div class="di">
-        <div class="table-responsive d-lg-flex align-items-lg-end" style="filter: saturate(162%) sepia(0%);">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><strong>ID</strong></th>
-                        <th><strong>Image</strong></th>
-                        <th><strong>Title</strong></th>
-                        <th><br><strong>Short Description</strong></th>
-                        <th><strong>Source Link</strong></th>
-                        <th><strong>VdieoLink</strong></th>
-                        <th><strong>status</strong></th>
-                        <th><strong>Edit</strong></th>
-                        <th><strong>Delete</strong></th>
-                    </tr>
-					<%
-						try{
-								connection = DriverManager.getConnection(connectionUrl+database, username, password);
-								statement=connection.createStatement();
-								String sql ="select * from projects";
-								resultSet = statement.executeQuery(sql);
-								while(resultSet.next()){
-					%>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><%=resultSet.getString("Project_Id") %></td>
-                        <td><img src="assets\assets_hashi/img/aicare.jpeg" style="width: 120px;height: 90pxpx;"></td>
-                        <td><br><%=resultSet.getString("Project_Title") %><br><br></td>
-                        <td style="width: 500px;font-size: 12px;"><%=resultSet.getString("Project_ShortDes") %><br><br></td>
-                        <td style="font-size: 12px;"><%=resultSet.getString("Project_Srclink") %></td>
-                        <td style="font-size: 12px;"><%=resultSet.getString("Project_Videolink") %></td>
-                        <td style="color: rgb(255,0,0);"><strong>select</strong></td>
-                        <td><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
-                        <td><a class="btn btn-danger" role="button" style="margin: 2px;background: rgb(255,1,1);"><i class="fas fa-trash"></i></a></td>
-                    </tr>
-                 <%
-						}
-							connection.close();
-						} catch (Exception e) {
-							e.printStackTrace();
-					}
-				%>
-
-                 
-                  
-                </tbody>
-            </table>
+    <section class="register-photo" style="background: rgb(231,254,225);">
+        <div class="form-container">
+        
+            <form action ="update" method="POST" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+            
+                <h3 class="text-center" style="font-family: 'Averia Gruesa Libre', cursive;color: rgb(17,145,15);font-size: 25px;"><strong>- Submit Your Project -</strong></h3>
+                <h2 class="text-center" style="text-align: left;"></h2>
+                
+              
+                <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>
+                <div class="form-group"><input class="form-control" type="text" name="title"></div>
+                
+                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Short Description :</strong></label>
+                <div class="form-group" style="height: 60px;"><textarea class="form-control" name="ShortDes" style="height: 90px;"></textarea></div>
+                
+               
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>
+                <div class="form-group"><textarea class="form-control" name="LongDes" style="height: 170px;"></textarea></div>
+                
+               
+                <label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label>
+                <input class="form-control-file" type="file">
+                
+                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label>
+                <input class="form-control" type="text" name="srcLink">
+                
+                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label>
+                <input class="form-control" type="text" name="videoLink">
+                
+                
+                <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Update Details">Submit Project</button></div>
+                
+                <div class="form-group">
+                    <div class="m-5">
+                        <div class="text-center m-3"></div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
+    </section>
     <div class="footer-basic" style="margin-top: 50px;">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
