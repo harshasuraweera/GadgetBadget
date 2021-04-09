@@ -1,0 +1,53 @@
+th {
+  position: sticky;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #e3e6f0;
+  font-weight: normal;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  /*box-sizing: inherit;*/
+}
+
+*:before, *:after {
+  /*box-sizing: inherit;*/
+}
+
+a {
+  color: #6d8de1;
+}
+
+#footer a:active, a:hover {
+  color: #fcf8f8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+}
+
+.btn {
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+

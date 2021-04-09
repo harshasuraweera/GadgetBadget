@@ -1,0 +1,70 @@
+a:hover {
+  text-decoration: none !important;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  /*box-sizing: inherit;*/
+}
+
+*:before, *:after {
+  /*box-sizing: inherit;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #4e4e4e;
+  font-family: "Open Sans";
+  font-weight: 600;
+}
+
+a {
+  color: #6d8de1;
+}
+
+#footer a:active, a:hover {
+  color: #fcf8f8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #4e4e4e;
+  font-family: "Open Sans";
+  font-weight: 500;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #4e4e4e;
+  font-family: "Open Sans";
+  font-weight: 400;
+}
+
+hr {
+  height: 2px;
+}
+
+hr {
+  height: 2px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #1485ee;
+  border: none;
+}
+
+.btn {
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
