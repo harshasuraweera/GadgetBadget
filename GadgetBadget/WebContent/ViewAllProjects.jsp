@@ -110,7 +110,7 @@ ResultSet resultSet = null;
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Srclink") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Videolink") %></td>
                         <td style="color: rgb(255,0,0);"><strong>select</strong></td>
-                        <td><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="EditProjectDetails.jsp?Project_Id=0<%=resultSet.getString("Project_Id") %>" class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
                         <td><a class="btn btn-danger" role="button" style="margin: 2px;background: rgb(255,1,1);"><i class="fas fa-trash"></i></a></td>
                     </tr>
                  <%

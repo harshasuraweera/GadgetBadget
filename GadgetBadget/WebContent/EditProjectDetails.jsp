@@ -1,3 +1,5 @@
+<%@page import="it19180380.Projects"%>
+<%@page import="it19180380.EditProjectDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -56,40 +58,55 @@
             </div>
         </nav>
     </div>
+    
+    <%
+    
+    String Project_Id=(String)request.getParameter("Project_Id");
+    
+    EditProjectDetails editprojectdetails = new EditProjectDetails();
+    
+    Projects project = editprojectdetails.get_values_of_projects(Project_Id);
+    
+    %>
+    
+    
+    
     <section class="register-photo" style="background: rgb(231,254,225);">
         <div class="form-container">
         
-            <form action ="update" method="POST" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+            <form action ="#" method="POST" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
             
                 <h3 class="text-center" style="font-family: 'Averia Gruesa Libre', cursive;color: rgb(17,145,15);font-size: 25px;"><strong>- Submit Your Project -</strong></h3>
                 <h2 class="text-center" style="text-align: left;"></h2>
                 
+                <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project ID :</strong></label>
+                <div class="form-group"><input class="form-control" type="text" name="ProjectID" value="<%=Project_Id%>"></div>
+                
               
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="title"></div>
+                <div class="form-group"><input class="form-control" type="text" name="title" value="<%=project.getProject_Title()%>"></div>
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Short Description :</strong></label>
-                <div class="form-group" style="height: 60px;"><textarea class="form-control" name="ShortDes" style="height: 90px;"></textarea></div>
                 
+                 <input class="form-control"  name="ShortDes"  class="form-control" type="textarea" value = "<%=project.getProject_ShortDes()%>"style="height: 90px;">
                
-                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>
-                <div class="form-group"><textarea class="form-control" name="LongDes" style="height: 170px;"></textarea></div>
-                
+                <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>          
+                <input class="form-control" class="form-control" type="textarea" value = "<%=project.getProject_LongDes()%>" name="LongDes" style="height: 170px;">
                
                 <label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label>
                 <input class="form-control-file" type="file">
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label>
-                <input class="form-control" type="text" name="srcLink">
+                <input class="form-control" type="text" value = "<%=project.getProject_Srclink()%>" name="srcLink">
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label>
-                <input class="form-control" type="text" name="videoLink">
+                <input class="form-control" type="text" name="videoLink" value = "<%=project.getProject_Videolink()%>" >
                 
                 
-                <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Update Details">Submit Project</button></div>
+                <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Update Details">Update Details</button></div>
                 
                 <div class="form-group">
                     <div class="m-5">
