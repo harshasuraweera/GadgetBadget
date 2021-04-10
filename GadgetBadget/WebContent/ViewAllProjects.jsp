@@ -1,3 +1,4 @@
+<%@page import="it19180380.Projects"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -76,7 +77,7 @@ ResultSet resultSet = null;
         </nav>
     </div>
     <hr>
-    <div class="di"></div><button class="btn btn-info btn-block btn-sm add-row btn-xs" type="button" style="height: 35px;background: rgb(79,170,88);font-size: 13px;font-family: 'Averia Gruesa Libre', cursive;color: rgb(0,0,0);"><i class="fa fa-plus"></i><strong>&nbsp;Add New Project</strong></button><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;font-size: 16px;color: rgb(64,157,56);" for="nombre"><strong>&nbsp; Your Projects :</strong></label>
+    <div class="di"></div><button  class="btn btn-info btn-block btn-sm add-row btn-xs" type="button" style="height: 35px;background: rgb(79,170,88);font-size: 13px;font-family: 'Averia Gruesa Libre', cursive;color: rgb(0,0,0);"><i class="fa fa-plus"></i><strong>&nbsp;Add New Project</strong></button><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;font-size: 16px;color: rgb(64,157,56);" for="nombre"><strong>&nbsp; Your Projects :</strong></label>
     <div class="di">
         <div class="table-responsive d-lg-flex align-items-lg-end" style="filter: saturate(162%) sepia(0%);">
             <table class="table">
@@ -99,6 +100,8 @@ ResultSet resultSet = null;
 								String sql ="select * from projects";
 								resultSet = statement.executeQuery(sql);
 								while(resultSet.next()){
+									
+									Projects project = new Projects();
 					%>
                 </thead>
                 <tbody>
@@ -110,8 +113,8 @@ ResultSet resultSet = null;
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Srclink") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Videolink") %></td>
                         <td style="color: rgb(255,0,0);"><strong>select</strong></td>
-                        <td><a href="EditProjectDetails.jsp?Project_Id=0<%=resultSet.getString("Project_Id") %>" class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
-                        <td><a class="btn btn-danger" role="button" style="margin: 2px;background: rgb(255,1,1);"><i class="fas fa-trash"></i></a></td>
+                        <td><a href="EditProjectDetails.jsp?Project_Id=<%=resultSet.getString("Project_Id") %>" class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="ProjectsControllers/ProjectDeleteController.jsp?Project_Id=<%=resultSet.getString("Project_Id") %>"class="btn btn-danger" role="button" style="margin: 2px;background: rgb(255,1,1);"><i class="fas fa-trash"></i></a></td>
                     </tr>
                  <%
 						}

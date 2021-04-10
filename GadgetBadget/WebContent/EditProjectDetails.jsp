@@ -74,7 +74,7 @@
     <section class="register-photo" style="background: rgb(231,254,225);">
         <div class="form-container">
         
-            <form action ="#" method="POST" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+            <form action ="ProjectsControllers/ProjectsEditController.jsp" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
             
                 <h3 class="text-center" style="font-family: 'Averia Gruesa Libre', cursive;color: rgb(17,145,15);font-size: 25px;"><strong>- Submit Your Project -</strong></h3>
                 <h2 class="text-center" style="text-align: left;"></h2>
