@@ -74,13 +74,13 @@
     <section class="register-photo" style="background: rgb(231,254,225);">
         <div class="form-container">
         
-            <form action ="ProjectsControllers/ProjectsEditController.jsp" style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
+            <form action ="ProjectsControllers/ProjectsEditController.jsp"  style="margin: 90;border-style: solid;border-color: rgb(37,158,34);background: rgb(255, 255, 255);">
             
                 <h3 class="text-center" style="font-family: 'Averia Gruesa Libre', cursive;color: rgb(17,145,15);font-size: 25px;"><strong>- Submit Your Project -</strong></h3>
                 <h2 class="text-center" style="text-align: left;"></h2>
                 
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project ID :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="ProjectID" value="<%=Project_Id%>"></div>
+                <div class="form-group"><input class="form-control" type="text" name="ProjectID" value="<%=Project_Id%>" readonly></div>
                 
               
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>

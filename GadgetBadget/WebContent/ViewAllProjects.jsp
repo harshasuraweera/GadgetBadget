@@ -86,7 +86,8 @@ ResultSet resultSet = null;
                         <th><strong>ID</strong></th>
                         <th><strong>Image</strong></th>
                         <th><strong>Title</strong></th>
-                        <th><br><strong>Short Description</strong></th>
+                        <th><strong>Short Description</strong></th>
+                        <th><strong>Long Description</strong></th>
                         <th><strong>Source Link</strong></th>
                         <th><strong>VdieoLink</strong></th>
                         <th><strong>status</strong></th>
@@ -109,7 +110,8 @@ ResultSet resultSet = null;
                         <td><%=resultSet.getString("Project_Id") %></td>
                         <td><img src="assets\assets_hashi/img/aicare.jpeg" style="width: 120px;height: 90pxpx;"></td>
                         <td><br><%=resultSet.getString("Project_Title") %><br><br></td>
-                        <td style="width: 500px;font-size: 12px;"><%=resultSet.getString("Project_ShortDes") %><br><br></td>
+                        <td style="width: 300px;font-size: 12px;"><%=resultSet.getString("Project_ShortDes") %></td>
+                        <td style="width: 500px;font-size: 12px;"><%=resultSet.getString("Project_LongDes") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Srclink") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Videolink") %></td>
                         <td style="color: rgb(255,0,0);"><strong>select</strong></td>

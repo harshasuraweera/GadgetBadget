@@ -51,17 +51,17 @@ public class EditProjectDetails {
 		try {
 		String querry="update projects set Project_Title=? , Project_ShortDes=? , Project_LongDes=? , Project_Srclink=? , Project_Videolink = ? where Project_Id=?";
 		ps=connection.prepareStatement(querry);	
-		ps.setString(1, project.getProject_Id());;
-		ps.setString(2, project.getProject_Title());;
-		ps.setString(3, project.getProject_ShortDes());;
-		ps.setString(4, project.getProject_LongDes());;
-		ps.setString(5, project.getProject_Srclink());;
-		ps.setString(6, project.getProject_Videolink());;
+		
+		
+		ps.setString(1, project.getProject_Title());;
+		ps.setString(2, project.getProject_ShortDes());;
+		ps.setString(3, project.getProject_LongDes());;
+		ps.setString(4, project.getProject_Srclink());;
+		ps.setString(5, project.getProject_Videolink());;
+		ps.setString(6, project.getProject_Id());;
 	    ps.executeUpdate();
 		
-		
-		
-		
+
 		} catch (Exception e) {
 		System.out.println(e);
 		}
