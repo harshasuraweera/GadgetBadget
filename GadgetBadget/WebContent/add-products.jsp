@@ -1,5 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+
+
+
+
 
 <head>
     <meta charset="utf-8">
@@ -85,18 +93,27 @@
             </div>
             <div><input type="text" class="form-control-plaintext" value="Store Name: " readonly /></div>
             <div style="text-align: center;">
-                <form class="bootstrap-form-with-validation" style="background: var(--light);padding: 40px;padding-top: 39px;text-align: left;border-style: solid;border-top-style: solid;border-top-color: var(--green);border-right-style: solid;border-right-color: var(--green);border-bottom-style: solid;border-bottom-color: var(--green);border-left-style: solid;border-left-color: var(--green);width: 930px;">
+                <form action="AddProductServlet"  method="POST" class="bootstrap-form-with-validation" style="background: var(--light);padding: 40px;padding-top: 39px;text-align: left;border-style: solid;border-top-style: solid;border-top-color: var(--green);border-right-style: solid;border-right-color: var(--green);border-bottom-style: solid;border-bottom-color: var(--green);border-left-style: solid;border-left-color: var(--green);width: 930px;">
                     <h2 class="text-center" style="color: var(--green);background: var(--white);text-shadow: 0px 0px var(--purple);">Stock Your Shop</h2>
-                    <div class="form-group" style="width: 820px;border-right-style: none;border-right-color: var(--indigo);"><label for="text-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-star"></i>&nbsp; &nbsp; Product ID</label><input class="form-control-plaintext" type="text" value="Product ID: " readonly /></div>
-                    <div class="form-group"><label for="text-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil-square-o"></i>&nbsp; &nbsp; Title</label><input type="text" class="form-control" id="text-input-2" name="text-input"  required /><small style="color: var(--blue);font-size: 14px;"><br>Tell the world all about your item and why they’ll love it.<br><br></small></div>
-                    <div class="form-group"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil"></i>&nbsp; &nbsp; Short Description</label><textarea class="form-control"></textarea><small style="color: var(--blue);font-size: 14px;"><br>Start with a brief overview that describes your item’s finest features. Shoppers will only see this description at first, so make it count!<br><br></small></div>
-                    <div class="form-group"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil"></i>&nbsp; &nbsp; Description</label><textarea class="form-control" style="max-height: 300px;height: 300px;" required></textarea><small style="color: var(--blue);font-size: 14px;">Not sure what else to say? Shoppers also like hearing about your process, and the story behind this item.<br><br></small></div>
+                    <div class="form-group" style="width: 820px;border-right-style: none;border-right-color: var(--indigo);"><label for="text-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-star"></i>&nbsp; &nbsp; Product ID</label>
+                    <input class="form-control-plaintext" type="text" value="Product ID: " readonly /></div>
+                    
+                    <div class="form-group"><label for="text-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil-square-o"></i>&nbsp; &nbsp; Title</label>
+                    <input type="text" class="form-control" id="text-input-2" name="title"  required /><small style="color: var(--blue);font-size: 14px;"><br>Tell the world all about your item and why they ’ll love it.<br><br></small></div>
+                    
+                    <div class="form-group"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil"></i>&nbsp; &nbsp; Short Description</label>
+                    <textarea class="form-control" name="sDesc"></textarea><small style="color: var(--blue);font-size: 14px;"><br>Start with a brief overview that describes your item’s finest features. Shoppers will only see this description at first, so make it count!<br><br></small></div>
+                    
+                    <div class="form-group"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-pencil"></i>&nbsp; &nbsp; Description</label>
+                    <textarea class="form-control" name="lDesc" style="max-height: 300px;height: 300px;" required></textarea><small style="color: var(--blue);font-size: 14px;">Not sure what else to say? Shoppers also like hearing about your process, and the story behind this item.<br><br></small></div>
+                    
                     <div class="form-group" style="width: 500px;height: 175px;border-style: none;"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;"><i class="fa fa-money"></i>&nbsp; &nbsp; Price</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text">USD<input type="number" class="form-control" required /><small class="form-text text-muted" style="color: var(--blue);">Please enter a price.</small></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text">USD<input type="number" class="form-control" name="price" required /><small class="form-text text-muted" style="color: var(--blue);">Please enter a price.</small></span></div>
                             <div class="input-group-append"></div>
                         </div><small style="font-size: 14px;color: var(--red);"><br>&nbsp;Price must be between USD 20 and USD 50,000.00.<br><br></small>
                     </div>
+                    
                     <div>
                         <div id="Success-Button">
                             <div class="modal fade" role="dialog" tabindex="-1" id="succesalert">
@@ -113,7 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="width: 600px;max-width: 600px;border-style: none;max-height: 200px;height: 200px;"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-file"></i>&nbsp; &nbsp; Upload File</label><small style="max-height: 40px;height: 40px;font-size: 15px;color: var(--blue);"><br>Buyers can download these files as soon as they complete their purchase.<br><br></small><input type="file" class="form-control-file" style="max-height: 50px;height: 50px;"  required/></div>
+                    <div class="form-group" style="width: 600px;max-width: 600px;border-style: none;max-height: 200px;height: 200px;"><label for="textarea-input" style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-file"></i>&nbsp; &nbsp; Upload File</label><small style="max-height: 40px;height: 40px;font-size: 15px;color: var(--blue);"><br>Buyers can download these files as soon as they complete their purchase.<br><br></small><input type="file" class="form-control-file" name="downloadLink" style="max-height: 50px;height: 50px;"  required/></div>
                     <div id="Success-Button">
                         <div class="modal fade" role="dialog" tabindex="-1" id="succesalert">
                             <div class="modal-dialog" role="document">
@@ -121,15 +138,15 @@
                                     <div class="modal-body" id="successalert" style="color: green;height: 112px;">
                                         <div class="form-row">
                                             <div class="col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 80px;"><i class="far fa-check-circle"></i></div>
-                                            <div class="col d-xl-flex justify-content-xl-start align-items-xl-center"><span class="d-xl-flex" style="font-size: 25px;"><strong>Success! </strong>&nbsp;This is alert</span></div>
+                                            <div class="col d-xl-flex justify-content-xl-start align-items-xl-center"><span class="d-xl-flex" style="font-size: 25px;"><strong>Success! </strong>&nbsp; Welcome</span></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="max-width: 500px;width: 500px;border-style: none;"><label style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-file-image-o"></i>&nbsp; &nbsp; Upload Images</label><input type="file" class="form-control-file" name="upload[]" multiple="multiple"/><small style="font-size: 14px;color: var(--blue);"><br>Use at least five photos to show the most important qualities of your items.<br><br></small></div>
-                    <div id="Success-Button" style="text-align: right;height: 60px;"><button class="btn btn-success" data-toggle="modal" data-target="#succesalert" type="button" style="width: 150px;height: 55px;background: var(--green);color: var(--white);border-top-color: var(--dark);border-right-style: solid;border-right-color: var(--dark);border-bottom-style: solid;border-bottom-color: var(--gray-dark);border-left-style: solid;border-left-color: var(--dark);">SAVE&nbsp;&nbsp;<i class="fas fa-save" style="color: var(--white);"></i></button>
+                    <div class="form-group" style="max-width: 500px;width: 500px;border-style: none;"><label style="font-size: 15px;font-family: 'Alfa Slab One', cursive;">&nbsp;<i class="fa fa-file-image-o"></i>&nbsp; &nbsp; Upload Images</label><input type="file" class="form-control-file" name="feturedImage" multiple="multiple"/><small style="font-size: 14px;color: var(--blue);"><br>Use at least five photos to show the most important qualities of your items.<br><br></small></div>
+                    <div id="Success-Button" style="text-align: right;height: 60px;"><button class="btn btn-success" type="submit" value = "Submit Product" data-toggle="modal" data-target="#succesalert" type="button" style="width: 150px;height: 55px;background: var(--green);color: var(--white);border-top-color: var(--dark);border-right-style: solid;border-right-color: var(--dark);border-bottom-style: solid;border-bottom-color: var(--gray-dark);border-left-style: solid;border-left-color: var(--dark);">SAVE&nbsp;&nbsp;<i class="fas fa-save" style="color: var(--white);"></i></button>
                         <div class="modal fade" role="dialog" tabindex="-1" id="succesalert">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">

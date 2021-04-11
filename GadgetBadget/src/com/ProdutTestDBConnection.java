@@ -7,7 +7,7 @@ public class ProdutTestDBConnection {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Connection con = ProductServiceDBConnection.getConnection();
+		Connection connection = ProductServiceDBConnection.getConnection();
 
 		
 	}

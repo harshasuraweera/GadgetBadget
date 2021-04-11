@@ -9,7 +9,7 @@ public class ProductServiceDBConnection {
 	private static String url = "jdbc:mysql://localhost:3306/productservise";
 	private static String userName = "root";
     private static String password = "Highschool23*";	
-	private static Connection conn;
+	private static Connection connection;
 
 
 	public static Connection getConnection() {
@@ -17,7 +17,7 @@ public class ProductServiceDBConnection {
 	    try {
 	        
 	      Class.forName("com.mysql.jdbc.Driver");
-	      conn = DriverManager.getConnection(url,userName, password);
+	      connection = DriverManager.getConnection(url,userName, password);
 	      System.out.println("Database connection is success!!!");
 	      
 	    
@@ -30,7 +30,7 @@ public class ProductServiceDBConnection {
 	      
 	      
 	      
-	    return conn;
+	    return connection;
 	  }
 
 }

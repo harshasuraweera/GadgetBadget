@@ -23,5 +23,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/HP/Downloads/Telegram Desktop/mysql-connector-java-8.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Documents/PAF/servlet/javax.servlet-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Documents/PAF/servlet/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Downloads/jstl-api-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Documents/PAF/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
