@@ -23,7 +23,7 @@ public class ProjectDbUtil {
 	
 	//Submit new project :
 	
-	public static boolean submitProjects(String title,String RandomprojectID, String ShortDes , String LongDes , String srcLink , String videoLink )
+	public static boolean submitProjects(String title,String RandomprojectID, String ShortDes , String LongDes ,String image, String srcLink , String videoLink )
 	{
 		boolean isSuccess = false;
 		 
@@ -31,7 +31,7 @@ public class ProjectDbUtil {
 	    	 	con = ProjectServiceDBConnection.getConnection();
 	    	 	stmt = con.createStatement();
 	    	 	
-	    	    String sql = "insert into projects (randomProj_ID, Project_Title, Project_ShortDes, Project_LongDes, Project_Srclink, Project_Videolink) values ('"+RandomprojectID+"', '"+title+"' , '"+ShortDes+"' , '"+LongDes+"' , '"+srcLink+"' , '"+videoLink+"' )";
+	    	    String sql = "insert into projects (randomProj_ID, Project_Title, Project_ShortDes, Project_LongDes,Project_Image, Project_Srclink, Project_Videolink) values ('"+RandomprojectID+"', '"+title+"' , '"+ShortDes+"' , '"+LongDes+"' ,'"+image+"', '"+srcLink+"' , '"+videoLink+"' )";
 	    	    int rs = stmt.executeUpdate(sql);
 	    	    
 	    	    if(rs > 0)
