@@ -23,14 +23,16 @@ public class ProjectSubmitServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String title = request.getParameter("title");
+		String RandomprojectID   = GenerateProjectID.generateProjectId();
 		String ShortDes   = request.getParameter("ShortDes");
 		String LongDes   = request.getParameter("LongDes");
 		String srcLink   = request.getParameter("srcLink");
 		String videoLink   = request.getParameter("videoLink");
+	
 		
 		boolean isTrue;
 		
-		isTrue = ProjectDbUtil.submitProjects(title, ShortDes, LongDes, srcLink, videoLink);
+		isTrue = ProjectDbUtil.submitProjects( title, RandomprojectID, ShortDes, LongDes, srcLink, videoLink);
 		
 		if(isTrue == true)
 		{

@@ -61,11 +61,11 @@
     
     <%
     
-    String Project_Id=(String)request.getParameter("Project_Id");
+    String randomProj_ID=(String)request.getParameter("randomProj_ID");
     
     EditProjectDetails editprojectdetails = new EditProjectDetails();
     
-    Projects project = editprojectdetails.get_values_of_projects(Project_Id);
+    Projects project = editprojectdetails.get_values_of_projects(randomProj_ID);
     
     %>
     
@@ -80,7 +80,7 @@
                 <h2 class="text-center" style="text-align: left;"></h2>
                 
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project ID :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="ProjectID" value="<%=Project_Id%>" readonly></div>
+                <div class="form-group"><input class="form-control" type="text" name="ProjectID" value="<%=randomProj_ID%>" readonly></div>
                 
               
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>

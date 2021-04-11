@@ -10,7 +10,7 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <body>
 <%
-String Project_Id=request.getParameter("ProjectID");
+String randomProj_ID=request.getParameter("ProjectID");
 String Project_Title=request.getParameter("title");
 String Project_ShortDes=request.getParameter("ShortDes");
 String Project_LongDes=request.getParameter("LongDes");
@@ -19,7 +19,7 @@ String Project_Videolink=request.getParameter("videoLink");
 
 Projects project = new Projects();
 
-project.setProject_Id(Project_Id);
+project.setRandomProj_ID(randomProj_ID);
 project.setProject_Title(Project_Title);
 project.setProject_ShortDes(Project_ShortDes);
 project.setProject_LongDes(Project_LongDes);

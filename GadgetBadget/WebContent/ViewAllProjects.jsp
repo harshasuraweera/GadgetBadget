@@ -1,3 +1,4 @@
+<%@page import="it19180380.GenerateProjectID"%>
 <%@page import="it19180380.Projects"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -21,6 +22,10 @@ e.printStackTrace();
 Connection connection = null;
 Statement statement = null;
 ResultSet resultSet = null;
+
+//generate order ID
+String Project_Id = GenerateProjectID.generateProjectId();
+
 %>
 
 <!DOCTYPE html>
@@ -83,14 +88,14 @@ ResultSet resultSet = null;
             <table class="table">
                 <thead>
                     <tr>
-                        <th><strong>ID</strong></th>
+                        <th><strong>Project ID</strong></th>
                         <th><strong>Image</strong></th>
                         <th><strong>Title</strong></th>
                         <th><strong>Short Description</strong></th>
-                        <th><strong>Long Description</strong></th>
+                        <th><strong><center>Long Description</center></strong></th>
                         <th><strong>Source Link</strong></th>
                         <th><strong>VdieoLink</strong></th>
-                        <th><strong>status</strong></th>
+                        <th><strong>Status</strong></th>
                         <th><strong>Edit</strong></th>
                         <th><strong>Delete</strong></th>
                     </tr>
@@ -107,15 +112,15 @@ ResultSet resultSet = null;
                 </thead>
                 <tbody>
                     <tr>
-                        <td><%=resultSet.getString("Project_Id") %></td>
+                        <td><%=resultSet.getString("randomProj_ID") %></td>
                         <td><img src="assets\assets_hashi/img/aicare.jpeg" style="width: 120px;height: 90pxpx;"></td>
                         <td><br><%=resultSet.getString("Project_Title") %><br><br></td>
-                        <td style="width: 300px;font-size: 12px;"><%=resultSet.getString("Project_ShortDes") %></td>
-                        <td style="width: 500px;font-size: 12px;"><%=resultSet.getString("Project_LongDes") %></td>
+                        <td style="width: 180px;font-size: 12px;"><%=resultSet.getString("Project_ShortDes") %></td>
+                        <td style="width: 300px;font-size: 12px;"><%=resultSet.getString("Project_LongDes") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Srclink") %></td>
                         <td style="font-size: 12px;"><%=resultSet.getString("Project_Videolink") %></td>
                         <td style="color: rgb(255,0,0);"><strong>select</strong></td>
-                        <td><a href="EditProjectDetails.jsp?Project_Id=<%=resultSet.getString("Project_Id") %>" class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="EditProjectDetails.jsp?randomProj_ID=<%=resultSet.getString("randomProj_ID") %>" class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a></td>
                         <td><a href="ProjectsControllers/ProjectDeleteController.jsp?Project_Id=<%=resultSet.getString("Project_Id") %>"class="btn btn-danger" role="button" style="margin: 2px;background: rgb(255,1,1);"><i class="fas fa-trash"></i></a></td>
                     </tr>
                  <%

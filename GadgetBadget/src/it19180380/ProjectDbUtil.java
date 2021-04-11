@@ -13,6 +13,7 @@ import com.ProjectServiceDBConnection;
 
 public class ProjectDbUtil {
 	
+	private static boolean isSuccess;
 	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
@@ -22,7 +23,7 @@ public class ProjectDbUtil {
 	
 	//Submit new project :
 	
-	public static boolean submitProjects(String title, String ShortDes , String LongDes , String srcLink , String videoLink )
+	public static boolean submitProjects(String title,String RandomprojectID, String ShortDes , String LongDes , String srcLink , String videoLink )
 	{
 		boolean isSuccess = false;
 		 
@@ -30,7 +31,7 @@ public class ProjectDbUtil {
 	    	 	con = ProjectServiceDBConnection.getConnection();
 	    	 	stmt = con.createStatement();
 	    	 	
-	    	    String sql = "insert into projects values (0,'"+title+"' , '"+ShortDes+"' , '"+LongDes+"' , '"+srcLink+"' , '"+videoLink+"' )";
+	    	    String sql = "insert into projects (randomProj_ID, Project_Title, Project_ShortDes, Project_LongDes, Project_Srclink, Project_Videolink) values ('"+RandomprojectID+"', '"+title+"' , '"+ShortDes+"' , '"+LongDes+"' , '"+srcLink+"' , '"+videoLink+"' )";
 	    	    int rs = stmt.executeUpdate(sql);
 	    	    
 	    	    if(rs > 0)
@@ -82,7 +83,37 @@ public class ProjectDbUtil {
 		
 	}
 	
+	//Update Project Details
 	
+	public static boolean updateProjects(String Project_Id,String Project_Title,String Project_ShortDes , String Project_LongDes, String Project_Srclink , String Project_Videolink)
+	{
+		
+		try {
+			
+    	 	con = ProjectServiceDBConnection.getConnection();
+    	 	stmt = con.createStatement();
+    	 	
+    	 	String sql ="update projects set Project_Title='"+Project_Title+"' , Project_ShortDes='"+Project_ShortDes+"' , Project_LongDes='"+Project_LongDes+"' , Project_Srclink='"+Project_Srclink+"' , Project_Videolink='"+Project_Videolink+"'"+"where Project_Id='"+Project_Id+"'";
+			int rs = stmt.executeUpdate(sql);
+    	 	
+			if(rs > 0)
+			{
+				isSuccess =  true;
+			}else {
+				
+				isSuccess =  false;
+			}
+			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+		return isSuccess;
+	}
     
     
  }

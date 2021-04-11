@@ -8,6 +8,7 @@ public class Projects {
 	private String Project_LongDes;
 	private String Project_Srclink;
 	private String Project_Videolink;
+	private String randomProj_ID;
 	
 	public String getProject_Id() {
 		return Project_Id;
@@ -44,6 +45,12 @@ public class Projects {
 	}
 	public void setProject_Videolink(String project_Videolink) {
 		Project_Videolink = project_Videolink;
+	}
+	public String getRandomProj_ID() {
+		return randomProj_ID;
+	}
+	public void setRandomProj_ID(String randomProj_ID) {
+		this.randomProj_ID = randomProj_ID;
 	}
 	
 
