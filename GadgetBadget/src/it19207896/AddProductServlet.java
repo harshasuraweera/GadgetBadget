@@ -40,7 +40,7 @@ public class AddProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//String storeId = request.getParameter("storeId");
-		//String productId = request.getParameter("productId");
+		String projectId = RequiredMethod.generateProductId();
 		String title = request.getParameter("title");
 		String sDesc = request.getParameter("sDesc");
 		String lDesc = request.getParameter("lDesc");
@@ -50,7 +50,7 @@ public class AddProductServlet extends HttpServlet {
 		
 		Connection connection = ProductServiceDBConnection.getConnection();
 		
-		Queries_2.addProduct(connection, title, sDesc, lDesc, price, downloadLink,feturedImage);
+		Queries_2.addProduct(connection,projectId,title, sDesc, lDesc, price, downloadLink,feturedImage);
 		
 		
 		RequestDispatcher dispatcher =request.getRequestDispatcher("/add-products.jsp");

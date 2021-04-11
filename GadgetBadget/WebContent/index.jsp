@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +72,8 @@
                         <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Selling</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">My Account</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
+                            <div class="dropdown-menu"><a class="dropdown-item" href="#">Projects</a><a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Store</a><a class="dropdown-item" href="#">Logout</a></div>
                         </li>
                     </ul>
                 </div>

@@ -1,4 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+ <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="it19207896.RequiredMethod"%>
+<%    
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "productservise";
+String username = "root";
+String password = "Highschool23*";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+
+
+
+%>    
+
+
+
 <!DOCTYPE html>
+
+
 <html lang="en">
 
 <head>
@@ -96,48 +129,57 @@
                                     <th style="border-style: solid;">ID</th>
                                     <th style="border-style: solid;width: 226.4;">Title</th>
                                     <th style="border-style: solid;text-align: center;width: 200px;">Description</th>
-                                    <th style="border-style: solid;">File Included</th>
-                                    <th class="sorter-false" style="border-style: solid;">Layout</th>
+                                    
                                     <th class="filter-false" style="border-style: solid;">Price</th>
                                     <th class="filter-false sorter-false" style="border-style: solid;width: 200px;text-align: center;">File</th>
                                     <th class="text-center filter-false sorter-false" style="border-style: solid;">Image</th>
                                     <th class="text-center filter-false sorter-false" style="border-style: solid;width: 130px;">Action</th>
                                 </tr>
+                                <%
+						try{
+								connection = DriverManager.getConnection(connectionUrl+database, username, password);
+								statement=connection.createStatement();
+								String sql ="select * from products";
+								resultSet = statement.executeQuery(sql);
+								while(resultSet.next()){
+									
+									String title = resultSet.getString("title");
+						        	String lDesc = resultSet.getString("lDesc");
+						        	String price = resultSet.getString("price");
+						        	String downloadLink = resultSet.getString("downloadLink");
+						        	String feturedImage = resultSet.getString("feturedImage");
+						        	String productId = resultSet.getString("productId");
+					%>
+                                
+                                
+                                
+                                
+                                
+                                
                             </thead>
                             <tbody>
                                 <tr style="font-size: 12px;border-style: solid;">
-                                    <td style="border-style: solid;">1</td>
-                                    <td style="border-style: solid;"><br>BigBlueButton<br><br></td>
-                                    <td style="border-style: solid;"><br>BigBlueButton Module ready for InfixLMS, we have ready for the current version, now you can start your Live Class from your own server<strong>Requirements:</strong>InfixLMS pre installed in your web serverDownload InfixLMS here –&nbsp;<a href="https://codecanyon.net/item/x/30626608">InfixLMS</a><br><br></td>
-                                    <td style="border-style: solid;">CSS3</td>
-                                    <td style="border-style: solid;">Responsive</td>
-                                    <td style="border-style: solid;">16.00</td>
-                                    <td style="border-style: solid;width: 226.4px;"><label></label></td>
-                                    <td style="border-style: solid;width: 226.4px;"><img src="assets/assets_tharu/img/01_preview.png" width="200px" height="150px"></td>
+                                    <td style="border-style: solid;"><% out.print(productId); %></td>
+                                    <td style="border-style: solid;"><br><%=resultSet.getString("title") %><br><br></td>
+                                    <td style="border-style: solid;"><br><%=resultSet.getString("lDesc") %><br><br></td>
+                                    
+                                    <td style="border-style: solid;"><%=resultSet.getString("price") %></td>
+                                    <td style="border-style: solid;width: 226.4px;"><%=resultSet.getString("downloadLink") %></td>
+                                    <td style="border-style: solid;width: 226.4px;"><%=resultSet.getString("feturedImage") %></td>
                                     <td style="border-style: solid;width: 226.4px;"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
                                 </tr>
-                                <tr style="font-size: 12px;border-style: solid;">
-                                    <td style="border-style: solid;">2</td>
-                                    <td style="border-style: solid;"><br>Galaxy – Data Science &amp; Analytics Laravel Theme<br><br></td>
-                                    <td style="border-style: solid;"><br>The Galaxy is a specially developed, PHP based Laravel Theme. We have built it focusing on all data science and AI related project website. This specially developed theme is the perfect fit for any Artificial Intelligence &amp; Machine Learning Service, Data science Service, Data Migration Service, Data Analytics, Data Visualisation Service, future technology, Data Warehouse Service, and Predictive Analytics Services that demands a professional look website with proper functionality.&nbsp;<strong>No coding required.</strong><br><br></td>
-                                    <td style="border-style: solid;">PHP</td>
-                                    <td style="border-style: solid;"><br>Responsive<br><br></td>
-                                    <td style="border-style: solid;">20.00</td>
-                                    <td style="border-style: solid;width: 222.4px;"></td>
-                                    <td style="border-style: solid;"><img src="assets/assets_tharu/img/07_homepage.jpg" width="200px" height="150px"></td>
-                                    <td style="border-style: solid;"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
-                                </tr>
-                                <tr style="font-size: 12px;border-style: solid;">
-                                    <td style="border-style: solid;">3</td>
-                                    <td style="border-style: solid;"><br>Fofo – Laravel Formfolio for Freelancers &amp; Agencies Theme<br><br></td>
-                                    <td style="border-style: solid;"><br><strong>Fofo</strong>&nbsp;is a modern design for any&nbsp;<strong>freelancers and agencies</strong>. You can boost your business using&nbsp;<strong>Formfolio for Freelancers &amp; Agencies Theme.</strong>Fofo has been developed with the latest technologies. The best way to best show your business or yourself to the world. Fofo is written in valid and clean HTML &amp; CSS3 code. It is also powered by Laravel. It’s easy to customize and also well documented so it’ll suit your needs.&nbsp;<strong>Build your website in a few clicks.</strong>&nbsp;Prepare your website in minutes with an understandable management panel.&nbsp;<strong>No coding required.</strong><br><br></td>
-                                    <td style="border-style: solid;"><br>HTML CSS3<br><br></td>
-                                    <td style="border-style: solid;"><br>Responsive<br><br></td>
-                                    <td style="border-style: solid;">34.00</td>
-                                    <td style="border-style: solid;width: 226.4px;"></td>
-                                    <td style="border-style: solid;"><img src="assets/assets_tharu/img/07_homepage%20(1).jpg" width="200px" height="150px"></td>
-                                    <td style="border-style: solid;"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
-                                </tr>
+                                
+                                
+                                 <%
+						}
+							connection.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+					}
+				%>
+                                
+                                
+                                
                             </tbody>
                         </table>
                     </div>
