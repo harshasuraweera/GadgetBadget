@@ -84,26 +84,26 @@
                 
               
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="title" value="<%=project.getProject_Title()%>"></div>
+                <div class="form-group"><input class="form-control" type="text" name="title" value="<%=project.getProject_Title()%>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" ></div>
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Short Description :</strong></label>
                 
-                 <input class="form-control"  name="ShortDes"  class="form-control" type="textarea" value = "<%=project.getProject_ShortDes()%>"style="height: 90px;">
+                 <input class="form-control"  name="ShortDes"  class="form-control" type="textarea" value = "<%=project.getProject_ShortDes()%>"style="height: 90px;" maxlength="100" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" placeholder="Should be less than 100 letters..">
                
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>          
-                <input class="form-control" class="form-control" type="textarea" value = "<%=project.getProject_LongDes()%>" name="LongDes" style="height: 170px;">
+                <input class="form-control" class="form-control" type="textarea" value = "<%=project.getProject_LongDes()%>" name="LongDes" style="height: 170px;" maxlength="100" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" placeholder="Should be less than 250 letters..">
                
                 <label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label>
                 <input class="form-control-file" type="file">
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label>
-                <input class="form-control" type="text" value = "<%=project.getProject_Srclink()%>" name="srcLink">
+                <input class="form-control" type="text" value = "<%=project.getProject_Srclink()%>" name="srcLink" pattern="https://.*" size="800" placeholder="https://example.com" pattern="https://.*" size="80" required >
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label>
-                <input class="form-control" type="text" name="videoLink" value = "<%=project.getProject_Videolink()%>" >
+                <input class="form-control" type="text" name="videoLink" value = "<%=project.getProject_Videolink()%>" pattern="https://.*" size="800" placeholder="https://example.com" pattern="https://.*" size="80" required>
                 
                 
                 <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Update Details">Update Details</button></div>

@@ -66,15 +66,16 @@
                 
               
                 <hr style="background: #ffffff;border-color: rgb(85,205,83);"><label style="font-family: Lato, sans-serif;font-weight: normal;" for="nombre"></label><label style="font-family: Lato, sans-serif;font-weight: normal;font-size: 13px;" for="nombre"><strong>Project Title :</strong></label>
-                <div class="form-group"><input class="form-control" type="text" name="title"></div>
+                <div class="form-group"><input class="form-control" type="text" name="title"  onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required></div>
+
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Short Description :</strong></label>
-                <div class="form-group" style="height: 60px;"><textarea class="form-control" name="ShortDes" style="height: 90px;"></textarea></div>
+                <div class="form-group" style="height: 60px;"><textarea class="form-control" name="ShortDes" style="height: 90px;" maxlength="100" placeholder="Should be less than 100 letters" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required></textarea></div>
                 
                
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Long Description :</strong></label><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"></label>
-                <div class="form-group"><textarea class="form-control" name="LongDes" style="height: 170px;"></textarea></div>
+                <div class="form-group"><textarea class="form-control" name="LongDes" style="height: 170px;" maxlength="250" placeholder="Should be less than 250 letters" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required></textarea></div>
                 
                
                 <label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Add Images :</strong></label>
@@ -82,11 +83,11 @@
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Source Link&nbsp;</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(31,118,50);" for="nombre"><strong>&nbsp; *</strong>(Upload your project into google drive and put the link in below ) :</label>
-                <input class="form-control" type="text" name="srcLink">
+                <input class="form-control" type="text" name="srcLink" pattern="https://.*" size="800" placeholder="https://example.com" pattern="https://.*" size="80" required>
                 
                 
                 <hr><label style="font-family:Lato, sans-serif;font-weight:normal;" for="nombre"><strong>Video Link :</strong></label><label style="font-family: 'Averia Gruesa Libre', cursive;font-weight: normal;color: rgb(44,118,47);" for="nombre"><strong>&nbsp; &nbsp;*</strong>(Upload your video into google drive or any social media platform and put the link in below)&nbsp;<strong> :</strong></label>
-                <input class="form-control" type="text" name="videoLink">
+                <input class="form-control" type="text" name="videoLink" pattern="https://.*" size="800" placeholder="https://example.com" pattern="https://.*" size="80" required>
                 
                 
                 <div class="m-5"><button class="btn btn-success ribbon" type="submit" value = "Submit Project">Submit Project</button></div>
@@ -104,13 +105,13 @@
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Serviços</a></li>
+                <li class="list-inline-item"><a href="#">ServiÃ§os</a></li>
                 <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Dúvidas</a></li>
+                <li class="list-inline-item"><a href="#">DÃºvidas</a></li>
                 <li class="list-inline-item"><a href="#">Politica Privacidade</a></li>
                 <li class="list-inline-item"><a href="#">Contactos</a></li>
             </ul>
-            <p class="copyright">Irlene Galiza © 2021</p>
+            <p class="copyright">Irlene Galiza Â© 2021</p>
         </footer>
     </div>
     <script src="assets\assets_hashi/js/jquery.min.js"></script>
