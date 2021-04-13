@@ -1,3 +1,4 @@
+<%@page import="it19207896.Queries_2"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -123,11 +124,13 @@ ResultSet resultSet = null;
             <div class="row">
                 <div class="col-12">
                     <div>
+                   
                         <table class="table table tablesorter" id="ipi-table">
                             <thead class="thead-dark">
                                 <tr style="border-style: solid;">
                                     <th style="border-style: solid;">ID</th>
                                     <th style="border-style: solid;width: 226.4;">Title</th>
+                                    <th style="border-style: solid;text-align: center;width: 200px;">Short Description</th>
                                     <th style="border-style: solid;text-align: center;width: 200px;">Description</th>
                                     
                                     <th class="filter-false" style="border-style: solid;">Price</th>
@@ -144,7 +147,8 @@ ResultSet resultSet = null;
 								while(resultSet.next()){
 									
 									String title = resultSet.getString("title");
-						        	String lDesc = resultSet.getString("lDesc");
+									String sDesc = resultSet.getString("sDesc");
+									String lDesc = resultSet.getString("lDesc");
 						        	String price = resultSet.getString("price");
 						        	String downloadLink = resultSet.getString("downloadLink");
 						        	String feturedImage = resultSet.getString("feturedImage");
@@ -161,12 +165,19 @@ ResultSet resultSet = null;
                                 <tr style="font-size: 12px;border-style: solid;">
                                     <td style="border-style: solid;"><% out.print(productId); %></td>
                                     <td style="border-style: solid;"><br><%=resultSet.getString("title") %><br><br></td>
+                                    <td style="border-style: solid;"><br><%=resultSet.getString("sDesc") %><br><br></td>
                                     <td style="border-style: solid;"><br><%=resultSet.getString("lDesc") %><br><br></td>
                                     
                                     <td style="border-style: solid;"><%=resultSet.getString("price") %></td>
                                     <td style="border-style: solid;width: 226.4px;"><%=resultSet.getString("downloadLink") %></td>
                                     <td style="border-style: solid;width: 226.4px;"><%=resultSet.getString("feturedImage") %></td>
-                                    <td style="border-style: solid;width: 226.4px;"><a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a></td>
+                                    <td style="border-style: solid;width: 226.4px;">
+                                    <a class="btn btn-success" role="button" style="background: rgb(11,171,56);margin: 2px;"><i class="fas fa-pencil-alt"></i></a>
+                                    
+                                     <form action="DeleteProductsServlet"  method="POST">
+                                     <input   type="hidden"  value=<% out.print(productId); %>  name="productId"/>
+                                    <a class="btn btn-danger" role="button" style="margin: 2px;"><i class="fas fa-trash"></i></a> </form></td>
+                                   
                                 </tr>
                                 
                                 
@@ -182,6 +193,7 @@ ResultSet resultSet = null;
                                 
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>
